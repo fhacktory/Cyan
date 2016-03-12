@@ -10,7 +10,7 @@ angular.module('Drinker.services', ['ngResource'])
         }])
 
         .factory('loginFactory', ['$resource', 'testURL', function($resource, testURL) {
-          return $resource(testURL + "/user");
+          return $resource(testURL + "/user/:mail");
         }])
 
         .factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
