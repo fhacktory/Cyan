@@ -32,11 +32,11 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
     var signin = new loginFactory($scope.loginData);
-    signin.$get()
+    signin.$get({mail: $scope.loginData})
     .then(function(res)  { console.log("login") })
     .catch(function(req) { console.log("error request obj"); })
     .finally(function()  { console.log("always called") });;
-    $state.go("app.dash");
+    //$state.go("app.dash");
 
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
