@@ -58,6 +58,16 @@ angular.module('Drinker', ['ionic', 'Drinker.controllers','Drinker.services'])
   }
 })
 
+.state('app.dash', {
+url: '/dash',
+views: {
+  'mainContent': {
+    templateUrl: 'templates/dash.html',
+    controller: 'DashController',
+  }
+}
+})
+
   .state('app.aboutus', {
       url: '/aboutus',
       views: {
