@@ -118,8 +118,13 @@ angular.module('Drinker.controllers', [])
     };
 }])
 
-.controller('IndexController', ['$scope', 'baseURL', function ($scope, baseURL) {
-    $scope.baseURL = baseURL;
+.controller('IndexController', ['$scope', 'signinFactory', function ($scope, signinFactory) {
+    $scope.signinData = {};
+    $scope.doSignin = function() {
+      console.log('Doing signin', $scope.signinData);
+      var signin = new signinFactory($scope.signinData);
+      signin.$save();
+    };
 }])
 
 .controller('AboutController', ['$scope', 'corporateFactory', 'leaders', 'baseURL', function($scope, corporateFactory, leaders, baseURL) {

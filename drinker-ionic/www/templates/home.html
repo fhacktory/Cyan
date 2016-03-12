@@ -5,19 +5,19 @@
             Sign in
         </div>
         <div class="item">
-          <form ng-submit="doLogin()">
+          <form ng-submit="doSignin()">
             <div class="list">
               <label class="item item-input">
                 <span class="input-label">email</span>
-                <input type="text" ng-model="loginData.email">
+                <input type="text" ng-model="signinData.email">
               </label>
               <label class="item item-input">
                 <span class="input-label">firstname</span>
-                <input type="text" ng-model="loginData.firstname">
+                <input type="text" ng-model="signinData.firstname">
               </label>
               <label class="item item-input">
                 <span class="input-label">lastname</span>
-                <input type="password" ng-model="loginData.lastname">
+                <input type="password" ng-model="signinData.lastname">
               </label>
               <label class="item">
                 <button class="button button-block button-positive" type="submit">Sign in</button>

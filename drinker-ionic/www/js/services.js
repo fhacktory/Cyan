@@ -2,6 +2,12 @@
 
 angular.module('Drinker.services', ['ngResource'])
         .constant("baseURL","http://localhost:3000/")
+        .constant("prodURL", "https://fhacktory.shep.fr/api")
+
+        .factory('signinFactory', ['$resource', 'prodURL', function($resource, prodURL) {
+          return $resource(prodURL + "/user");
+        }])
+
         .factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
             return $resource(baseURL + "dishes/:id", null, {
                 'update': {

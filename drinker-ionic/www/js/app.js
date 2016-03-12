@@ -53,7 +53,7 @@ angular.module('Drinker', ['ionic', 'Drinker.controllers','Drinker.services'])
   views: {
     'mainContent': {
       templateUrl: 'templates/home.html',
-        controller: 'IndexController',
+      controller: 'IndexController',
     }
   }
 })
