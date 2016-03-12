@@ -130,7 +130,7 @@ class Api(object):
         """
         bars = db_query("""
             SELECT bar.*, avg(rating.mark) as mark FROM bar
-            JOIN rating ON bar.id = rating.bar_id
+            LEFT JOIN rating ON bar.id = rating.bar_id
             GROUP BY bar.id;
         """)
 
@@ -144,7 +144,7 @@ class Api(object):
         try:
             bar = db_query("""
             SELECT bar.*, avg(rating.mark) as mark FROM bar
-            JOIN rating ON bar.id = rating.bar_id
+            LEFT JOIN rating ON bar.id = rating.bar_id
             WHERE id = %s
             GROUP BY bar.id;
             """, bar_id)[0]
