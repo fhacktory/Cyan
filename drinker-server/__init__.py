@@ -19,33 +19,39 @@ class Api(object):
             match = route_comment.match(str(method[1].__doc__).strip())
             if match:
                 verb = match.group(1)
-                route = match.group(2)
+                route = '/api/' + match.group(2).lstrip('/')
+                route = route.rstrip('/')
 
                 self.app.add_url_rule(
-                    rule='/api/' + route,
+                    rule=route,
                     endpoint=method[0],
                     view_func=self._endpoint_wrapper(method[1]),
-                    methods=[verb]
+                    methods=['OPTION', verb]
                 )
-                logger.debug('Route created: %6s - %s' % (method, route))
+                logger.debug('Route created: %6s - %s' % (verb, route))
 
     def _endpoint_wrapper(self, func):
         def run(*args, **kwargs):
             res = {'status': 'error', 'data': 'No data'}
             try:
                 data = request.get_json(force=True, silent=True)
-                res_data = func(data, *args, **kwargs)
+                res_data = func(data or {}, *args, **kwargs)
 
-                res = jsonify({
+                res = {
                     'status': 'ok',
                     'data': res_data
-                })
+                }
             except Exception as err:
-                res = jsonify({
+                res = {
                     'status': 'error',
                     'data': str(err)
-                })
+                }
             finally:
+                res = jsonify(res)
+                res.headers['Access-Control-Allow-Origin'] = '*'
+                res.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, DELETE'
+                res.headers['Access-Control-Allow-Headers'] = '*'
+                res.headers['Access-Control-Max-Age'] = 1728000
                 return res
         return run
 
