@@ -1,4 +1,3 @@
-import json
 import re
 import sys
 import logging
@@ -6,8 +5,6 @@ import inspect
 import mysql.connector
 from mysql.connector import IntegrityError
 from flask import Flask, request, jsonify
-from flask.blueprints import Blueprint
-from pip._vendor import requests
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
