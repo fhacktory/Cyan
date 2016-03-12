@@ -1,4 +1,10 @@
 {
   "name": "Drinker",
-  "app_id": ""
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://fhacktory.shep.fr/api"
+    }
+  ]
 }

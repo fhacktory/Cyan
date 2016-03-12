@@ -1,4 +1,4 @@
-angular.module('Drinker.controllers', [])
+angular.module('Drinker.controllers', ['ionic','ngCordova'])
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $state, loginFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
@@ -32,11 +32,11 @@ angular.module('Drinker.controllers', [])
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
     var signin = new loginFactory($scope.loginData);
-    signin.$get()
+    signin.$get({mail: $scope.loginData})
     .then(function(res)  { console.log("login") })
     .catch(function(req) { console.log("error request obj"); })
     .finally(function()  { console.log("always called") });;
-    $state.go("app.dash");
+    //$state.go("app.dash");
 
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
@@ -134,10 +134,41 @@ angular.module('Drinker.controllers', [])
     };
 }])
 
-.controller('DashController', ['$scope', 'signinFactory', function ($scope, signinFactory) {
+.controller('DashController', ['$scope', 'signinFactory', '$cordovaGeolocation', '$ionicLoading', '$ionicPlatform', function ($scope, signinFactory, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+  ionic.Platform.ready(function(){
+    $ionicLoading.show({
+        template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
+    });
 
-}])
+    var posOptions = {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 0
+    };
 
+    $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+        var lat  = position.coords.latitude;
+        var long = position.coords.longitude;
+        console.log(lat + " - " + long);
+        var myLatlng = new google.maps.LatLng(lat, long);
+
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        $scope.map = map;
+        $ionicLoading.hide();
+
+    }, function(err) {
+        $ionicLoading.hide();
+        console.log(err);
+      });
+    })
+  }])
 
 .controller('AboutController', ['$scope', 'corporateFactory', 'leaders', 'baseURL', function($scope, corporateFactory, leaders, baseURL) {
 
