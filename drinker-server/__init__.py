@@ -119,6 +119,155 @@ class Api(object):
 
         return self.user_get(data, email=email)
 
+    def get_bar(self, data):
+        """
+            GET: /bar
+        """
+        bars = db_query("""
+            SELECT * FROM bar;
+        """)
+
+        return bars
+
+    def bar_rating(self, data, bar_id, rating):
+        """
+            PUT: /bar/<bar_id>/<int:rating>
+        """
+        if rating < 0 or rating > 5:
+            raise Exception('Rating must be rating < 0 or rating > 5')
+
+        if 'user_id' not in request.args:
+            raise Exception('No user')
+
+        db_query("""
+            INSERT INTO rating (mark, user_id, bar_id, drink_id)
+            VALUES (%s, %s, %s, %s)
+        """, request.args('user_id'),
+             bar_id,
+             None,
+             rating)
+
+        return 'OK'
+
+    def drink_rating(self, data, drink_id, rating):
+        """
+            PUT: /drink/<drink_id>/<int:rating>
+        """
+        if rating < 0 or rating > 5:
+            raise Exception('Rating must be rating < 0 or rating > 5')
+
+        if 'user_id' not in request.args:
+            raise Exception('No user')
+
+        db_query("""
+            INSERT INTO rating (mark, user_id, bar_id, drink_id)
+            VALUES (%s, %s, %s, %s)
+        """, request.args('user_id'),
+             None,
+             drink_id,
+             rating)
+
+        return 'OK'
+
+    def search_bar_drink(self, data, text):
+        """
+            GET: /search/<text>
+        """
+        bars = db_query("""
+            SELECT * FROM bar
+            WHERE upper(name) LIKE upper(%s)
+              AND upper(description) LIKE upper(%s)
+              AND upper(kind) LIKE upper(%s);
+        """, text, text, text)
+
+        drinks = db_query("""
+            SELECT * FROM drink
+            WHERE upper(name) LIKE upper(%s)
+              AND upper(description) LIKE upper(%s)
+              AND upper(tags) LIKE upper(%s);
+        """, text, text, text)
+
+        return {
+            'bar': bars,
+            'drink': drinks
+        }
+
+    def get_friends(self, data):
+        """
+            GET: /friend
+        """
+
+        if 'user_id' not in request.args:
+            raise Exception('No user')
+
+        current_friends = db_query("""
+            SELECT * FROM user
+            JOIN friend ON user.id = friend.friend_id OR user.id = friend.user_id
+            WHERE friend.status = 'accepted'
+             AND user.id = %s;
+        """, request.args.get('user_id'))
+
+        requested_friends = db_query("""
+            SELECT * FROM user
+            JOIN friend ON user.id = friend.user_id
+            WHERE friend.status = 'pending'
+             AND user.id = %s;
+        """, request.args.get('user_id'))
+
+        pending_friends = db_query("""
+            SELECT * FROM user
+            JOIN friend ON user.id = friend.friend_id
+            WHERE friend.status = 'pending'
+             AND user.id = %s;
+        """, request.args.get('user_id'))
+
+        return {
+            'current': current_friends,
+            'request': requested_friends,
+            'pending': pending_friends
+        }
+
+    def friend_add(self, data, user_mail):
+        """
+            GET: /friend/<user_mail>
+        """
+
+        if 'user_id' not in request.args:
+            raise Exception('No user')
+
+        db_query("""
+             INSERT INTO friend ( user_id, friend_id, status)
+             VALUES (%s, (SELECT id FROM user WHERE email = %s), 'pending');
+        """, request.args.get('user_id'), user_mail)
+
+        return "Friend request sent"
+
+    def friend_accept(self, data, friend_id):
+        """
+            GET: /friend/<friend_id>
+        """
+
+        db_query("""
+             UPDATE friend SET status = 'accepted' WHERE id = %s;
+        """, friend_id)
+
+        return "Friend request accepted"
+
+    def drink_list(self, data):
+        """
+            GET: /drink
+        """
+
+        if 'bar_id' not in request.args:
+            drinks = db_query("""
+                 SELECT * FROM drink WHERE bar_id = %s;
+            """, request.args.get('bar_id'))
+        else:
+            drinks = db_query("""
+                 SELECT * FROM drink;
+            """)
+
+        return drinks
 
 
 app = Flask(__name__)
