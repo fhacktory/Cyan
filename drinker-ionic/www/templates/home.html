@@ -2,38 +2,29 @@
   <ion-content>
     <div class="card">
         <div class="item item-divider">
-            Our Lipsmacking Culinary Creations
-            <span class="badge badge-assertive">{{dish.label}}</span>
+            Sign in
         </div>
-        <div class="item item-thumbnail-left item-text-wrap">
-            <img ng-src="{{baseURL+dish.image}}" alt="Uthappizza">
-            <h2>{{dish.name}}
-             <span class="badge">{{dish.price | currency}}</span></h2>
-            <p>{{dish.description}}</p>
+        <div class="item">
+          <form ng-submit="doSignin()">
+            <div class="list">
+              <label class="item item-input">
+                <span class="input-label">email</span>
+                <input type="text" ng-model="signinData.email">
+              </label>
+              <label class="item item-input">
+                <span class="input-label">firstname</span>
+                <input type="text" ng-model="signinData.firstname">
+              </label>
+              <label class="item item-input">
+                <span class="input-label">lastname</span>
+                <input type="password" ng-model="signinData.lastname">
+              </label>
+              <label class="item">
+                <button class="button button-block button-positive" type="submit">Sign in</button>
+              </label>
+            </div>
+          </form>
         </div>
     </div>
-    <div class="card">
-          <div class="item item-divider">
-            This Month's Promotions
-            <span class="badge badge-assertive">{{promotion.label}}</span>
-          </div>
-          <div class="item item-thumbnail-left item-text-wrap">
-               <img ng-src="{{baseURL+promotion.image}}" alt="{{promotion.name}}">
-                <h2>{{promotion.name}}
-                 <span class="badge">{{promotion.price | currency}}</span></h2>
-                <p>{{promotion.description}}</p>
-          </div>
-      </div>
-      <div class="card">
-          <div class="item item-divider">
-            Meet our Culinary Specialists
-          </div>
-          <div class="item item-thumbnail-left item-text-wrap">
-               <img ng-src="{{baseURL+leader.image}}" alt="{{leader.name}}">
-                <h2>{{leader.name}}</h2>
-                <h4>{{leader.designation}}</h4>
-                <p>{{leader.description}}</p>
-          </div>
-      </div>
   </ion-content>
 </ion-view>
