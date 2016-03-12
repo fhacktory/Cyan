@@ -1,0 +1,236 @@
+{
+  "user": [
+    {
+      "id": 0,
+      "firstname": "Jean",
+      "lastname": "Burellier",
+      "email": "shep@drink.fr",
+      "picture": "images/users/jb.jpg",
+      "longposition": 1,
+      "latposition": 0
+    },
+    {
+      "id": 1,
+      "firstname": "Cyril",
+      "lastname": "Demingeon",
+      "email": "cyrbil@drink.fr",
+      "picture": "images/users/cd.jpg",
+      "longposition": 1,
+      "latposition": 1
+    },
+    {
+      "id": 2,
+      "firstname": "Mark",
+      "lastname": "Zuckerberg",
+      "email": "mark@drink.fr",
+      "picture": "images/users/mz.jpg",
+      "longposition": 0,
+      "latposition": 1
+    },
+    {
+      "id": 3,
+      "firstname": "Geo",
+      "lastname": "Trouvetou",
+      "email": "geo@drink.fr",
+      "picture": "images/users/gt.jpg",
+      "longposition": 2,
+      "latposition": 0
+    }
+  ],
+  "bar": [
+    {
+      "id": 0,
+      "name": "kolok",
+      "price": "$",
+      "kind": "fun",
+      "longposition": 1,
+      "latposition": 0,
+      "description": "Des tireuses a bieres, juste a coté de la tour du web"
+    },
+    {
+      "id": 0,
+      "name": "le sud",
+      "price": "$$",
+      "kind": "good",
+      "longposition": 1,
+      "latposition": 0,
+      "description": "A cote de la maison"
+    },
+    {
+      "id": 0,
+      "name": "le nord",
+      "price": "$$$",
+      "kind": "pricy",
+      "longposition": 1,
+      "latposition": 0,
+      "description": "Avant l'apero a opera"
+    },
+    {
+      "id": 0,
+      "name": "bocuse",
+      "price": "$$$$",
+      "kind": "hard",
+      "longposition": 1,
+      "latposition": 0,
+      "description": "ca coute cher la vieillesse !"
+    }
+  ],
+  "drink": [
+    {
+      "id": 0,
+      "name": "Mojito",
+      "picture": "images/drinks/mojito.jpg",
+      "tags": "rhum, menthe, citron",
+      "price": "10",
+      "description": "Du rhum, de la menthe, du citron et du fun",
+      "bar_id": 2
+    },
+    {
+      "id": 0,
+      "name": "Mojito",
+      "picture": "images/drinks/mojito.jpg",
+      "tags": "rhum, menthe, citron",
+      "price": "10",
+      "description": "Du rhum, de la menthe, du citron et du fun",
+      "bar_id": 2
+    },
+    {
+      "id": 0,
+      "name": "Mojito",
+      "picture": "images/drinks/mojito.jpg",
+      "tags": "rhum, menthe, citron",
+      "price": "10",
+      "description": "Du rhum, de la menthe, du citron et du fun",
+      "bar_id": 2
+    },
+    {
+      "id": 0,
+      "name": "Mojito",
+      "picture": "images/drinks/mojito.jpg",
+      "tags": "rhum, menthe, citron",
+      "price": "10",
+      "description": "Du rhum, de la menthe, du citron et du fun",
+      "bar_id": 2
+    }
+  ],
+  "rating": [
+    {
+      "id": 0,
+      "mark": 3,
+      "user_id": 1,
+      "bar_id": 0,
+      "drink_id": null
+    },
+    {
+      "id": 1,
+      "mark": 3,
+      "user_id": 1,
+      "bar_id": null,
+      "drink_id": 1
+    },
+    {
+      "id": 2,
+      "mark": 3,
+      "user_id": 1,
+      "bar_id": 0,
+      "drink_id": null
+    },
+    {
+      "id": 3,
+      "mark": 3,
+      "user_id": 1,
+      "bar_id": 0,
+      "drink_id": null
+    }
+  ],
+  "comment": [
+    {
+      "id": 0,
+      "text": "Super",
+      "user_id": 0,
+      "bar_id": 1,
+      "drink_id": null
+    },
+    {
+      "id": 1,
+      "text": "Good",
+      "user_id": 1,
+      "bar_id": 0,
+      "drink_id": 2
+    },
+    {
+      "id": 2,
+      "text": "Yolo",
+      "user_id": 2,
+      "bar_id": 2,
+      "drink_id": null
+    }
+  ],
+  "friend": [
+    {
+      "id": 0,
+      "user_id": 0,
+      "friend_id":1,
+      "status": "accepted"
+    },
+    {
+      "id": 1,
+      "user_id": 0,
+      "friend_id":2,
+      "status": "rejected"
+    },
+    {
+      "id": 2,
+      "user_id": 0,
+      "friend_id": 3,
+      "status": "pending"
+    }
+  ],
+  "favoris": [
+    {
+      "id": 0,
+      "user_id": 1,
+      "bar_id": 0,
+      "drink_id": null
+    }
+  ],
+  "notification": [
+    {
+      "id": 0,
+      "message": "Vous avez reçu une drink request",
+      "user_id": 0,
+      "status": "unread"
+    }
+  ],
+  "historic": [
+    {
+      "id": 0,
+      "user_id": 0,
+      "bar_id": 0,
+      "date": "12/03/2016"
+    }
+  ],
+  "request": [
+    {
+      "id": 0,
+      "user_id": 0,
+      "friend_id": 1,
+      "bar_id": 0
+    },
+    {
+      "id": 0,
+      "user_id": 0,
+      "friend_id": 2,
+      "bar_id": 0
+    }
+  ],
+  "dept": [
+    {
+      "id": 0,
+      "description": "",
+      "creditor": 0,
+      "debtor": 1,
+      "drink_id": 1
+    }
+  ]
+}
