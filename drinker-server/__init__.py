@@ -19,10 +19,10 @@ class Api(object):
             match = route_comment.match(str(method[1].__doc__).strip())
             if match:
                 verb = match.group(1)
-                route = match.group(2)
+                route = '/api/' + match.group(2)
 
                 self.app.add_url_rule(
-                    rule='/api/' + route,
+                    rule=route,
                     endpoint=method[0],
                     view_func=self._endpoint_wrapper(method[1]),
                     methods=[verb]
