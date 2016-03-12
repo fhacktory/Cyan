@@ -3,6 +3,10 @@
 angular.module('Drinker.services', ['ngResource'])
         .constant("baseURL","http://localhost:3000/")
         .factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1d91609c353063fa5154fda68c95d3d3e94f03cd
             return $resource(baseURL + "dishes/:id", null, {
                 'update': {
                     method: 'PUT'

@@ -40,6 +40,37 @@ angular.module('Drinker.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+<<<<<<< HEAD
+=======
+
+  // Create the reserve modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/reserve.html', {
+    scope: $scope
+  }).then(function(modal) {
+    $scope.reserveform = modal;
+  });
+
+  // Triggered in the reserve modal to close it
+  $scope.closeReserve = function() {
+    $scope.reserveform.hide();
+  };
+
+  // Open the reserve modal
+  $scope.reserve = function() {
+    $scope.reserveform.show();
+  };
+
+  // Perform the reserve action when the user submits the reserve form
+  $scope.doReserve = function() {
+    console.log('Doing reservation', $scope.reservation);
+
+    // Simulate a reservation delay. Remove this and replace with your reservation
+    // code if using a server system
+    $timeout(function() {
+      $scope.closeReserve();
+    }, 1000);
+  };
+>>>>>>> 1d91609c353063fa5154fda68c95d3d3e94f03cd
 })
 
 .controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory',
@@ -118,10 +149,26 @@ angular.module('Drinker.controllers', [])
     };
 }])
 
+<<<<<<< HEAD
 .controller('IndexController', ['$scope', 'baseURL', function ($scope, baseURL) {
     $scope.baseURL = baseURL;
 
 
+=======
+.controller('IndexController', ['$scope', 'menuFactory', 'promotionFactory',
+'corporateFactory', 'promotion', 'leader', 'dish', 'baseURL', function ($scope,
+  menuFactory, promotionFactory, corporateFactory, promotion, leader,
+  dish, baseURL) {
+
+    $scope.baseURL = baseURL;
+    $scope.leader = leader
+
+    $scope.showDish = false;
+    $scope.message = "Loading ...";
+
+    $scope.dish = dish;
+    $scope.promotion = promotion
+>>>>>>> 1d91609c353063fa5154fda68c95d3d3e94f03cd
 
 }])
 

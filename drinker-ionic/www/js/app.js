@@ -8,6 +8,7 @@ angular.module('Drinker', ['ionic', 'Drinker.controllers','Drinker.services'])
 
 .run(function($ionicPlatform, $rootScope, $ionicLoading) {
   $ionicPlatform.ready(function() {
+<<<<<<< HEAD
     if (window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -17,6 +18,20 @@ angular.module('Drinker', ['ionic', 'Drinker.controllers','Drinker.services'])
     }
   });
 
+=======
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
+
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+>>>>>>> 1d91609c353063fa5154fda68c95d3d3e94f03cd
   $rootScope.$on('loading:show', function () {
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner> Loading ...'
@@ -54,6 +69,20 @@ angular.module('Drinker', ['ionic', 'Drinker.controllers','Drinker.services'])
     'mainContent': {
       templateUrl: 'templates/home.html',
         controller: 'IndexController',
+<<<<<<< HEAD
+=======
+        resolve: {
+            leader:  ['corporateFactory', function(corporateFactory){
+              return corporateFactory.get({id: 3});
+            }],
+            dish:  ['menuFactory', function(menuFactory){
+              return menuFactory.get({id: 0});
+            }],
+            promotion: ['promotionFactory', function(promotionFactory) {
+                return promotionFactory.get({id: 0});
+            }]
+        }
+>>>>>>> 1d91609c353063fa5154fda68c95d3d3e94f03cd
     }
   }
 })
