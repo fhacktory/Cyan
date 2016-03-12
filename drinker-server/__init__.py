@@ -145,7 +145,7 @@ class Api(object):
             bar = db_query("""
             SELECT bar.*, avg(rating.mark) as mark FROM bar
             LEFT JOIN rating ON bar.id = rating.bar_id
-            WHERE id = %s
+            WHERE bar.id = %s
             GROUP BY bar.id;
             """, bar_id)[0]
         except:
