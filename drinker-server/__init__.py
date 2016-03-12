@@ -15,7 +15,7 @@ class Api(object):
         self.app = app
 
         # create routes
-        route_comment = re.compile(r'(GET|PUT|POST|DELETE)\s*:\s*([^\s]+)', re.I)
+        route_comment = re.compile(r'(GET|PUT|POST|DELETE)\s*:\s*([^\s]+)\s*(.*)', re.I)
         for method in inspect.getmembers(self, predicate=inspect.ismethod):
             match = route_comment.match(str(method[1].__doc__).strip())
             if match:
@@ -29,7 +29,7 @@ class Api(object):
                     view_func=self._endpoint_wrapper(method[1]),
                     methods=['OPTION', verb]
                 )
-                logger.debug('Route created: %6s - %s' % (verb, route))
+                logger.debug('Route created: %6s - %-35s %s' % (verb, route, match.group(3)))
 
     def _endpoint_wrapper(self, func):
         def run(*args, **kwargs):
@@ -60,12 +60,14 @@ class Api(object):
     def hello_world(self, data):
         """
             GET: /
+            Return hello world
         """
         return 'Hello World'
 
     def user_create(self, data):
         """
             POST: /user
+            Create new user (body: email, first_name, last_name)
         """
         if 'email' not in data:
             raise Exception('No email send')
@@ -89,6 +91,7 @@ class Api(object):
     def user_get(self, data, email):
         """
             GET: /user/<email>
+            Get user info
         """
         try:
             user = db_query("""
@@ -106,6 +109,7 @@ class Api(object):
     def user_update_coord(self, data, email):
         """
             PUT: /user/<email>
+            Update user coordinates
         """
         if 'latposition' not in data:
             raise Exception('No latposition send')
@@ -119,19 +123,41 @@ class Api(object):
 
         return self.user_get(data, email=email)
 
-    def get_bar(self, data):
+    def bar_list(self, data):
         """
             GET: /bar
+            Get bar list (optional: nearby user)
         """
         bars = db_query("""
-            SELECT * FROM bar;
+            SELECT bar.*, avg(rating.mark) as mark FROM bar
+            JOIN rating ON bar.id = rating.bar_id
+            GROUP BY bar.id;
         """)
 
         return bars
 
+    def bar_detail(self, data, bar_id):
+        """
+            GET: /bar/<int:bar_id>
+            Get bar info
+        """
+        try:
+            bar = db_query("""
+            SELECT bar.*, avg(rating.mark) as mark FROM bar
+            JOIN rating ON bar.id = rating.bar_id
+            WHERE id = %s
+            GROUP BY bar.id;
+            """, bar_id)[0]
+        except:
+            raise Exception('Bar not found')
+
+        return bar
+
     def bar_rating(self, data, bar_id, rating):
         """
             PUT: /bar/<bar_id>/<int:rating>
+            Rate a bar (?user_id=XXX)
+
         """
         if rating < 0 or rating > 5:
             raise Exception('Rating must be rating < 0 or rating > 5')
@@ -152,6 +178,7 @@ class Api(object):
     def drink_rating(self, data, drink_id, rating):
         """
             PUT: /drink/<drink_id>/<int:rating>
+            Rate a drink (?user_id=XXX)
         """
         if rating < 0 or rating > 5:
             raise Exception('Rating must be rating < 0 or rating > 5')
@@ -195,6 +222,7 @@ class Api(object):
     def get_friends(self, data):
         """
             GET: /friend
+            List user's friends
         """
 
         if 'user_id' not in request.args:
@@ -230,6 +258,7 @@ class Api(object):
     def friend_add(self, data, user_mail):
         """
             GET: /friend/<user_mail>
+            Add a new friend (?user_id=XXX)
         """
 
         if 'user_id' not in request.args:
@@ -245,6 +274,7 @@ class Api(object):
     def friend_accept(self, data, friend_id):
         """
             GET: /friend/<friend_id>
+            Accept a friend request
         """
 
         db_query("""
@@ -256,6 +286,7 @@ class Api(object):
     def drink_list(self, data):
         """
             GET: /drink
+            List drinks (optional: ?bar_id=XXX)
         """
 
         if 'bar_id' not in request.args:
