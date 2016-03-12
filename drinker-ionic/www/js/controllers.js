@@ -134,7 +134,7 @@ angular.module('Drinker.controllers', [])
     };
 }])
 
-.controller('DashController', ['$scope', 'signinFactory', function ($scope, signinFactory) {
+.controller('DashController', ['$scope', 'signinFactory', 'ngCordova', function ($scope, signinFactory, ngCordova) {
 
 }])
 
