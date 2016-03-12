@@ -27,7 +27,7 @@ class Api(object):
                     view_func=self._endpoint_wrapper(method[1]),
                     methods=[verb]
                 )
-                logger.debug('Route created: %6s - %s' % (method, route))
+                logger.debug('Route created: %6s - %s' % (verb, route))
 
     def _endpoint_wrapper(self, func):
         def run(*args, **kwargs):
