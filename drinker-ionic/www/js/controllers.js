@@ -1,6 +1,5 @@
 angular.module('Drinker.controllers', [])
-
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $state, loginFactory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -10,7 +9,7 @@ angular.module('Drinker.controllers', [])
   //});
 
   // Form data for the login modal
-  $scope.loginData = $localStorage.getObject('userinfo','{}');
+  $scope.loginData = {};
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -32,7 +31,12 @@ angular.module('Drinker.controllers', [])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    $localStorage.storeObject('userinfo',$scope.loginData);
+    var signin = new loginFactory($scope.loginData);
+    signin.$get()
+    .then(function(res)  { console.log("login") })
+    .catch(function(req) { console.log("error request obj"); })
+    .finally(function()  { console.log("always called") });;
+    $state.go("app.dash");
 
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
@@ -123,9 +127,17 @@ angular.module('Drinker.controllers', [])
     $scope.doSignin = function() {
       console.log('Doing signin', $scope.signinData);
       var signin = new signinFactory($scope.signinData);
-      signin.$save();
+      signin.$save()
+      .then(function(res)  { console.log("signin") })
+      .catch(function(req) { console.log("error saving obj"); })
+      .finally(function()  { console.log("always called") });;
     };
 }])
+
+.controller('DashController', ['$scope', 'signinFactory', function ($scope, signinFactory) {
+
+}])
+
 
 .controller('AboutController', ['$scope', 'corporateFactory', 'leaders', 'baseURL', function($scope, corporateFactory, leaders, baseURL) {
 

@@ -2,10 +2,15 @@
 
 angular.module('Drinker.services', ['ngResource'])
         .constant("baseURL","http://localhost:3000/")
-        .constant("prodURL", "https://fhacktory.shep.fr/api")
+        .constant("testURL2", "http://localhost:1337/fhacktory.shep.fr/api")
+        .constant("testURL", "https://fhacktory.shep.fr/api")
 
-        .factory('signinFactory', ['$resource', 'prodURL', function($resource, prodURL) {
-          return $resource(prodURL + "/user");
+        .factory('signinFactory', ['$resource', 'testURL', function($resource, testURL) {
+          return $resource(testURL + "/user");
+        }])
+
+        .factory('loginFactory', ['$resource', 'testURL', function($resource, testURL) {
+          return $resource(testURL + "/user");
         }])
 
         .factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
