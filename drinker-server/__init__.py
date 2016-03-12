@@ -36,16 +36,21 @@ class Api(object):
                 data = request.get_json(force=True, silent=True)
                 res_data = func(data, *args, **kwargs)
 
-                res = jsonify({
+                res = {
                     'status': 'ok',
                     'data': res_data
-                })
+                }
             except Exception as err:
-                res = jsonify({
+                res = {
                     'status': 'error',
                     'data': str(err)
-                })
+                }
             finally:
+                res = jsonify(res)
+                res.headers['Access-Control-Allow-Origin'] = '*'
+                res.headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, DELETE'
+                res.headers['Access-Control-Allow-Headers'] = '*'
+                res.headers['Access-Control-Max-Age'] = 1728000
                 return res
         return run
 
