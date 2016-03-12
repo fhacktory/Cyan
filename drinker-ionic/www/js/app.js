@@ -68,6 +68,16 @@ views: {
 }
 })
 
+.state('app.bar', {
+url: '/bar/:id',
+views: {
+  'mainContent': {
+    templateUrl: 'templates/bar.html',
+    controller: 'BarController',
+  }
+}
+})
+
   .state('app.aboutus', {
       url: '/aboutus',
       views: {

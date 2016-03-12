@@ -2,18 +2,14 @@
   <ion-content>
       <div id="map" data-tap-disabled="true"></div>
       <ion-list>
-        <ion-item>
-          <h2>Kolok</h2>
-          <p>bar a biere</p>
-        </ion-item>
-        <ion-item>
-          <h2>la pipe</h2>
-          <p>tabac</p>
-        </ion-item>
-        <ion-item>
-          <h2>fhacktory</h2>
-          <p>bar a genies</p>
-        </ion-item>
+        <ion-list>
+          <ion-item ng-repeat="bar in bars" href="#/app/bar/{{bar.id}}" class="item-thumbnail-left">
+            <h2>{{bar.name}}
+             <span style="font-size:75%">{{bar.price}}</span>
+            </h2>
+            <p>{{bar.description}}</p>
+          </ion-item>
+        </ion-list>
       </ion-list>
   </ion-content>
 </ion-view>
