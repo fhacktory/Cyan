@@ -19,13 +19,14 @@ class Api(object):
             match = route_comment.match(str(method[1].__doc__).strip())
             if match:
                 verb = match.group(1)
-                route = '/api/' + match.group(2)
+                route = '/api/' + match.group(2).lstrip('/')
+                route = route.rstrip('/')
 
                 self.app.add_url_rule(
                     rule=route,
                     endpoint=method[0],
                     view_func=self._endpoint_wrapper(method[1]),
-                    methods=[verb]
+                    methods=['OPTION', verb]
                 )
                 logger.debug('Route created: %6s - %s' % (verb, route))
 
@@ -34,7 +35,7 @@ class Api(object):
             res = {'status': 'error', 'data': 'No data'}
             try:
                 data = request.get_json(force=True, silent=True)
-                res_data = func(data, *args, **kwargs)
+                res_data = func(data or {}, *args, **kwargs)
 
                 res = {
                     'status': 'ok',
