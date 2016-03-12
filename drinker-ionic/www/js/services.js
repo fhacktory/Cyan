@@ -9,8 +9,11 @@ angular.module('Drinker.services', ['ngResource'])
           return $resource(testURL + "/user");
         }])
 
-        .factory('loginFactory', ['$resource', 'testURL', function($resource, testURL) {
-          return $resource(testURL + "/user/:mail");
+        .service('loginFactory', ['$resource', 'testURL', function($resource, testURL) {
+          this.getLogin = function () {
+                    return $resource(testURL+"/user/:mail");
+          };
+          //return $resource(testURL + "/user/:mail");
         }])
 
         .factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
