@@ -138,12 +138,14 @@ def db_query(query, *args):
     logger.warn('DB QUERY: %s\n%s', query, args)
     cursor = None
     try:
-        cursor = db.cursor(dictionary=True)
+        cursor = db.cursor()
         cursor.execute(query, args)
-        if cursor.lastrowid:
+        if cursor.lastrowid is not None:
             db.commit()
             return cursor.lastrowid
-        data = list(cursor)
+        data = []
+        for row in cursor.fetchall():
+            data.append(dict(zip(cursor.column_names, row)))
         return data
     except Exception as err:
         logger.exception(err)
