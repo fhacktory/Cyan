@@ -317,9 +317,18 @@ class Api(object):
             LIMIT 10;
         """ % (text, text, text))
 
+        users = db_query("""
+            SELECT * FROM user
+            WHERE upper(email) LIKE upper('%%%s%%')
+              OR upper(first_name) LIKE upper('%%%s%%')
+              OR upper(last_name) LIKE upper('%%%s%%')
+            LIMIT 10;
+        """ % (text, text, text))
+
         return {
             'bar': bars,
-            'drink': drinks
+            'drink': drinks,
+            'user': users
         }
 
     def get_friends(self, data):
