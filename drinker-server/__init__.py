@@ -121,12 +121,6 @@ class Api(object):
             WHERE email = %s;
         """, request.args.get('lat'), request.args.get('long'), email)
 
-        request.args = dict(request.args)
-        request.args.update({
-            'lat': request.args.get('lat'),
-            'long': request.args.get('long')
-        })
-
         return self.bar_list(data)
 
     def bar_list(self, data):
