@@ -297,21 +297,22 @@ class Api(object):
         """
             GET: /search/<text>
         """
+        text = re.sub('[^\w]', '.', text)
         bars = db_query("""
             SELECT * FROM bar
-            WHERE upper(name) LIKE upper(concat('%', %s, '%'))
-              OR upper(description) LIKE upper(concat('%', %s, '%'))
-              OR upper(kind) LIKE upper(concat('%', %s, '%'))
+            WHERE name LIKE upper('%%%s%%')
+              OR description LIKE upper('%%%s%%')
+              OR kind LIKE upper('%%%s%%')
             LIMIT 10;
-        """, text, text, text)
+        """ % (text, text, text))
 
         drinks = db_query("""
             SELECT * FROM drink
-            WHERE upper(name) LIKE upper(concat('%', %s, '%'))
-              OR upper(description) LIKE upper(concat('%', %s, '%'))
-              OR upper(tags) LIKE upper(concat('%', %s, '%'))
+            WHERE upper(name) LIKE upper('%%%s%%')
+              OR upper(description) LIKE upper('%%%s%%')
+              OR upper(tags) LIKE upper('%%%s%%')
             LIMIT 10;
-        """, text, text, text)
+        """ % (text, text, text))
 
         return {
             'bar': bars,
