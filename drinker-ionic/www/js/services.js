@@ -34,20 +34,17 @@ angular.module('Drinker.services', ['ngResource'])
           this.getDrinks = function(){
                 return $resource(testURL+"/drink?bar_id=:id",null);
             };
+
+            this.sendRating = function(){
+                  return $resource(testURL+"/bar/:id/:rating?user_id=:user",null);
+              };
         }])
 
-        .factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
-            return $resource(baseURL + "dishes/:id", null, {
-                'update': {
-                    method: 'PUT'
-                }
-            });
+        .service('searchFactory', ['$resource', 'testURL', function($resource, testURL) {
 
-        }])
-
-        .factory('promotionFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
-                    return $resource(baseURL + "promotions/:id");
-
+          this.getSearchs = function(){
+                return $resource(testURL+"/search/:text",null);
+            };
         }])
 
         .factory('favoriteFactory', ['$resource', '$localStorage','baseURL', function ($resource, $localStorage, baseURL) {
