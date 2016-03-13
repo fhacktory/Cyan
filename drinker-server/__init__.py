@@ -391,14 +391,11 @@ class Api(object):
             'pending': pending_friends
         }
 
-    def friend_add(self, data, user_mail):
+    def friend_add(self, data, user_mail, user_id):
         """
-            GET: /friend/<user_mail>
-            Add a new friend (?user_id=XXX)
+            GET: /friend/<user_id>/<user_mail>
+            Add a new friend
         """
-
-        if 'user_id' not in request.args:
-            raise Exception('No user')
 
         db_query("""
              INSERT INTO friend ( user_id, friend_id, status)
