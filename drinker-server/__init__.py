@@ -376,6 +376,11 @@ class Api(object):
              AND friend.friend_id = %s;
         """, request.args.get('user_id'))
 
+        for friends in [current_friends, requested_friends, pending_friends]:
+            for friend in friends:
+                email_hash = hashlib.md5(friend.get('email').lower()).hexdigest()
+                friend['picture'] = 'http://www.gravatar.com/avatar/' + email_hash
+
         return {
             'current': current_friends,
             'request': requested_friends,
