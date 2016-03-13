@@ -192,8 +192,9 @@ class Api(object):
                 photo = None
             else:
                 photo = 'https://maps.googleapis.com/maps/api/place/photo' \
-                '?photoreference=%s' \
-                '&key=AIzaSyAdd9una-efwMK7JTNvDUxNjA67sfOZaI4'\
+                '?maxwidth=400' \
+                '&photoreference=%s' \
+                '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
                 % photos[0].get('photo_reference')
             db_res.update({
                 'picture': photo,
@@ -231,8 +232,9 @@ class Api(object):
             photo = None
         else:
             photo = 'https://maps.googleapis.com/maps/api/place/photo' \
-            '?photoreference=%s' \
-            '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
+                '?maxwidth=400' \
+                '&photoreference=%s' \
+                '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
             % photos[0].get('photo_reference')
         bar.update({
             'picture': photo,
