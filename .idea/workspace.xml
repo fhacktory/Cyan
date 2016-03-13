@@ -82,58 +82,58 @@
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/drinker-server/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5405405">
-              <caret line="126" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="506" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.8108108">
+              <caret line="121" column="31" selection-start-line="121" selection-start-column="31" selection-end-line="121" selection-end-column="31" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <element signature="e#2150#2244#0" expanded="false" />
-                <element signature="e#8887#9429#0" expanded="false" />
-                <element signature="e#9478#9597#0" expanded="false" />
-                <marker date="1457847103843" expanded="true" signature="2696:2779" placeholder="INSERT INTO user... " />
-                <marker date="1457847103843" expanded="true" signature="3256:3291" placeholder="SELECT * FRO... user" />
-                <marker date="1457847103843" expanded="true" signature="3846:3926" placeholder="UPDATE user " />
-                <marker date="1457847103843" expanded="true" signature="3853:3878" placeholder="SELECT * FRO... user" />
-                <marker date="1457847103843" expanded="true" signature="5030:5235" placeholder="SELECT bar.*... bar" />
-                <marker date="1457847103843" expanded="true" signature="5513:5633" placeholder="INSERT INTO bar... " />
-                <marker date="1457847103843" expanded="true" signature="7146:7325" placeholder="SELECT bar.*... bar" />
-                <marker date="1457847103843" expanded="true" signature="8613:8701" placeholder="INSERT INTO rating... " />
-                <marker date="1457847103843" expanded="true" signature="9215:9303" placeholder="INSERT INTO rating... " />
-                <marker date="1457847103843" expanded="true" signature="9739:9893" placeholder="SELECT * FRO... bar" />
-                <marker date="1457847103843" expanded="true" signature="9739:9914" placeholder="SELECT * FRO... bar" />
-                <marker date="1457847103843" expanded="true" signature="9739:9924" placeholder="SELECT * FRO... bar" />
-                <marker date="1457847103843" expanded="true" signature="9753:9756" placeholder="INSERT INTO rating... " />
-                <marker date="1457847103843" expanded="true" signature="10886:11063" placeholder="SELECT * FRO... drink" />
-                <marker date="1457847103843" expanded="true" signature="10886:11084" placeholder="SELECT * FRO... drink" />
-                <marker date="1457847103843" expanded="true" signature="10886:11094" placeholder="SELECT * FRO... drink" />
-                <marker date="1457847103843" expanded="true" signature="11162:11364" placeholder="SELECT * FRO... user" />
-                <marker date="1457847103843" expanded="true" signature="11938:12061" placeholder="SELECT * FRO... user" />
-                <marker date="1457847103843" expanded="true" signature="11938:12118" placeholder="SELECT * FRO... user" />
-                <marker date="1457847103843" expanded="true" signature="12216:12374" placeholder="SELECT * FRO... user" />
-                <marker date="1457847103843" expanded="true" signature="12470:12623" placeholder="SELECT * FRO... user" />
-                <marker date="1457847103843" expanded="true" signature="13004:13022" placeholder="INSERT INTO friend... " />
-                <marker date="1457847103843" expanded="true" signature="13004:13052" placeholder="INSERT INTO friend... " />
-                <marker date="1457847103843" expanded="true" signature="13004:13128" placeholder="INSERT INTO friend... " />
-                <marker date="1457847103843" expanded="true" signature="13004:13138" placeholder="INSERT INTO friend... " />
-                <marker date="1457847103843" expanded="true" signature="13079:13115" placeholder="SELECT id FR... user" />
-                <marker date="1457847103843" expanded="true" signature="13380:13404" placeholder="UPDATE frien... " />
-                <marker date="1457847103843" expanded="true" signature="13380:13431" placeholder="UPDATE frien... " />
-                <marker date="1457847103843" expanded="true" signature="13721:13740" placeholder="SELECT * FRO... drink" />
-                <marker date="1457847103843" expanded="true" signature="13721:13755" placeholder="SELECT * FRO... drink" />
-                <marker date="1457847103843" expanded="true" signature="13721:13758" placeholder="SELECT * FRO... drink" />
-                <marker date="1457847103843" expanded="true" signature="13870:13889" placeholder="SELECT * FRO... drink" />
-                <marker date="1457847103843" expanded="true" signature="14153:14172" placeholder="INSERT INTO request... " />
-                <marker date="1457847103843" expanded="true" signature="14153:14201" placeholder="INSERT INTO request... " />
-                <marker date="1457847103843" expanded="true" signature="14153:14233" placeholder="INSERT INTO request... " />
-                <marker date="1457847103843" expanded="true" signature="14541:14572" placeholder="SELECT user.... user" />
-                <marker date="1457847103843" expanded="true" signature="14541:14589" placeholder="SELECT user.... user" />
-                <marker date="1457847103843" expanded="true" signature="14541:14597" placeholder="SELECT user.... user" />
-                <marker date="1457847103843" expanded="true" signature="14541:14600" placeholder="SELECT user.... user" />
-                <marker date="1457847103843" expanded="true" signature="14541:14618" placeholder="SELECT user.... user" />
-                <marker date="1457847103843" expanded="true" signature="14541:14628" placeholder="SELECT user.... user" />
-                <marker date="1457847103843" expanded="true" signature="14541:14664" placeholder="SELECT user.... user" />
-                <marker date="1457847103843" expanded="true" signature="14541:14667" placeholder="SELECT user.... user" />
-                <marker date="1457847103843" expanded="true" signature="14888:14907" placeholder="DELETE FROM " />
-                <marker date="1457847103843" expanded="true" signature="14888:14921" placeholder="DELETE FROM " />
+                <element signature="e#8888#9430#0" expanded="false" />
+                <element signature="e#9479#9598#0" expanded="false" />
+                <marker date="1457847193446" expanded="true" signature="2696:2779" placeholder="INSERT INTO user... " />
+                <marker date="1457847193446" expanded="true" signature="3256:3291" placeholder="SELECT * FRO... user" />
+                <marker date="1457847193446" expanded="true" signature="3847:3927" placeholder="UPDATE user " />
+                <marker date="1457847193446" expanded="true" signature="3854:3879" placeholder="SELECT * FRO... user" />
+                <marker date="1457847193446" expanded="true" signature="5031:5236" placeholder="SELECT bar.*... bar" />
+                <marker date="1457847193446" expanded="true" signature="5514:5634" placeholder="INSERT INTO bar... " />
+                <marker date="1457847193446" expanded="true" signature="7147:7326" placeholder="SELECT bar.*... bar" />
+                <marker date="1457847193446" expanded="true" signature="8614:8702" placeholder="INSERT INTO rating... " />
+                <marker date="1457847193446" expanded="true" signature="9216:9304" placeholder="INSERT INTO rating... " />
+                <marker date="1457847193446" expanded="true" signature="9740:9894" placeholder="SELECT * FRO... bar" />
+                <marker date="1457847193446" expanded="true" signature="9740:9915" placeholder="SELECT * FRO... bar" />
+                <marker date="1457847193446" expanded="true" signature="9740:9925" placeholder="SELECT * FRO... bar" />
+                <marker date="1457847193446" expanded="true" signature="9754:9757" placeholder="INSERT INTO rating... " />
+                <marker date="1457847193446" expanded="true" signature="10887:11064" placeholder="SELECT * FRO... drink" />
+                <marker date="1457847193446" expanded="true" signature="10887:11085" placeholder="SELECT * FRO... drink" />
+                <marker date="1457847193446" expanded="true" signature="10887:11095" placeholder="SELECT * FRO... drink" />
+                <marker date="1457847193446" expanded="true" signature="11163:11365" placeholder="SELECT * FRO... user" />
+                <marker date="1457847193446" expanded="true" signature="11939:12062" placeholder="SELECT * FRO... user" />
+                <marker date="1457847193446" expanded="true" signature="11939:12119" placeholder="SELECT * FRO... user" />
+                <marker date="1457847193446" expanded="true" signature="12217:12375" placeholder="SELECT * FRO... user" />
+                <marker date="1457847193446" expanded="true" signature="12471:12624" placeholder="SELECT * FRO... user" />
+                <marker date="1457847193446" expanded="true" signature="13005:13023" placeholder="INSERT INTO friend... " />
+                <marker date="1457847193446" expanded="true" signature="13005:13053" placeholder="INSERT INTO friend... " />
+                <marker date="1457847193446" expanded="true" signature="13005:13129" placeholder="INSERT INTO friend... " />
+                <marker date="1457847193446" expanded="true" signature="13005:13139" placeholder="INSERT INTO friend... " />
+                <marker date="1457847193446" expanded="true" signature="13080:13116" placeholder="SELECT id FR... user" />
+                <marker date="1457847193446" expanded="true" signature="13381:13405" placeholder="UPDATE frien... " />
+                <marker date="1457847193446" expanded="true" signature="13381:13432" placeholder="UPDATE frien... " />
+                <marker date="1457847193446" expanded="true" signature="13722:13741" placeholder="SELECT * FRO... drink" />
+                <marker date="1457847193446" expanded="true" signature="13722:13756" placeholder="SELECT * FRO... drink" />
+                <marker date="1457847193446" expanded="true" signature="13722:13759" placeholder="SELECT * FRO... drink" />
+                <marker date="1457847193446" expanded="true" signature="13871:13890" placeholder="SELECT * FRO... drink" />
+                <marker date="1457847193446" expanded="true" signature="14154:14173" placeholder="INSERT INTO request... " />
+                <marker date="1457847193446" expanded="true" signature="14154:14202" placeholder="INSERT INTO request... " />
+                <marker date="1457847193446" expanded="true" signature="14154:14234" placeholder="INSERT INTO request... " />
+                <marker date="1457847193446" expanded="true" signature="14542:14573" placeholder="SELECT user.... user" />
+                <marker date="1457847193446" expanded="true" signature="14542:14590" placeholder="SELECT user.... user" />
+                <marker date="1457847193446" expanded="true" signature="14542:14598" placeholder="SELECT user.... user" />
+                <marker date="1457847193446" expanded="true" signature="14542:14601" placeholder="SELECT user.... user" />
+                <marker date="1457847193446" expanded="true" signature="14542:14619" placeholder="SELECT user.... user" />
+                <marker date="1457847193446" expanded="true" signature="14542:14629" placeholder="SELECT user.... user" />
+                <marker date="1457847193446" expanded="true" signature="14542:14665" placeholder="SELECT user.... user" />
+                <marker date="1457847193446" expanded="true" signature="14542:14668" placeholder="SELECT user.... user" />
+                <marker date="1457847193446" expanded="true" signature="14889:14908" placeholder="DELETE FROM " />
+                <marker date="1457847193446" expanded="true" signature="14889:14922" placeholder="DELETE FROM " />
               </folding>
             </state>
           </provider>
@@ -745,7 +745,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457846375320</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="qvj qjlv qv">
+      <created>1457847112106</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1457847112106</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -838,53 +844,53 @@
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <element signature="e#2150#2244#0" expanded="false" />
-            <element signature="e#8887#9429#0" expanded="false" />
-            <element signature="e#9478#9597#0" expanded="false" />
-            <marker date="1457847103843" expanded="true" signature="2696:2779" placeholder="INSERT INTO user... " />
-            <marker date="1457847103843" expanded="true" signature="3256:3291" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="3846:3926" placeholder="UPDATE user " />
-            <marker date="1457847103843" expanded="true" signature="3853:3878" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="5030:5235" placeholder="SELECT bar.*... bar" />
-            <marker date="1457847103843" expanded="true" signature="5513:5633" placeholder="INSERT INTO bar... " />
-            <marker date="1457847103843" expanded="true" signature="7146:7325" placeholder="SELECT bar.*... bar" />
-            <marker date="1457847103843" expanded="true" signature="8613:8701" placeholder="INSERT INTO rating... " />
-            <marker date="1457847103843" expanded="true" signature="9215:9303" placeholder="INSERT INTO rating... " />
-            <marker date="1457847103843" expanded="true" signature="9739:9893" placeholder="SELECT * FRO... bar" />
-            <marker date="1457847103843" expanded="true" signature="9739:9914" placeholder="SELECT * FRO... bar" />
-            <marker date="1457847103843" expanded="true" signature="9739:9924" placeholder="SELECT * FRO... bar" />
-            <marker date="1457847103843" expanded="true" signature="9753:9756" placeholder="INSERT INTO rating... " />
-            <marker date="1457847103843" expanded="true" signature="10886:11063" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="10886:11084" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="10886:11094" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="11162:11364" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="11938:12061" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="11938:12118" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="12216:12374" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="12470:12623" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="13004:13022" placeholder="INSERT INTO friend... " />
-            <marker date="1457847103843" expanded="true" signature="13004:13052" placeholder="INSERT INTO friend... " />
-            <marker date="1457847103843" expanded="true" signature="13004:13128" placeholder="INSERT INTO friend... " />
-            <marker date="1457847103843" expanded="true" signature="13004:13138" placeholder="INSERT INTO friend... " />
-            <marker date="1457847103843" expanded="true" signature="13079:13115" placeholder="SELECT id FR... user" />
-            <marker date="1457847103843" expanded="true" signature="13380:13404" placeholder="UPDATE frien... " />
-            <marker date="1457847103843" expanded="true" signature="13380:13431" placeholder="UPDATE frien... " />
-            <marker date="1457847103843" expanded="true" signature="13721:13740" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="13721:13755" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="13721:13758" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="13870:13889" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="14153:14172" placeholder="INSERT INTO request... " />
-            <marker date="1457847103843" expanded="true" signature="14153:14201" placeholder="INSERT INTO request... " />
-            <marker date="1457847103843" expanded="true" signature="14153:14233" placeholder="INSERT INTO request... " />
-            <marker date="1457847103843" expanded="true" signature="14541:14572" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14589" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14597" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14600" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14618" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14628" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14664" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14667" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14888:14907" placeholder="DELETE FROM " />
-            <marker date="1457847103843" expanded="true" signature="14888:14921" placeholder="DELETE FROM " />
+            <element signature="e#8888#9430#0" expanded="false" />
+            <element signature="e#9479#9598#0" expanded="false" />
+            <marker date="1457847193446" expanded="true" signature="2696:2779" placeholder="INSERT INTO user... " />
+            <marker date="1457847193446" expanded="true" signature="3256:3291" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="3847:3927" placeholder="UPDATE user " />
+            <marker date="1457847193446" expanded="true" signature="3854:3879" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="5031:5236" placeholder="SELECT bar.*... bar" />
+            <marker date="1457847193446" expanded="true" signature="5514:5634" placeholder="INSERT INTO bar... " />
+            <marker date="1457847193446" expanded="true" signature="7147:7326" placeholder="SELECT bar.*... bar" />
+            <marker date="1457847193446" expanded="true" signature="8614:8702" placeholder="INSERT INTO rating... " />
+            <marker date="1457847193446" expanded="true" signature="9216:9304" placeholder="INSERT INTO rating... " />
+            <marker date="1457847193446" expanded="true" signature="9740:9894" placeholder="SELECT * FRO... bar" />
+            <marker date="1457847193446" expanded="true" signature="9740:9915" placeholder="SELECT * FRO... bar" />
+            <marker date="1457847193446" expanded="true" signature="9740:9925" placeholder="SELECT * FRO... bar" />
+            <marker date="1457847193446" expanded="true" signature="9754:9757" placeholder="INSERT INTO rating... " />
+            <marker date="1457847193446" expanded="true" signature="10887:11064" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="10887:11085" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="10887:11095" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="11163:11365" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="11939:12062" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="11939:12119" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="12217:12375" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="12471:12624" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="13005:13023" placeholder="INSERT INTO friend... " />
+            <marker date="1457847193446" expanded="true" signature="13005:13053" placeholder="INSERT INTO friend... " />
+            <marker date="1457847193446" expanded="true" signature="13005:13129" placeholder="INSERT INTO friend... " />
+            <marker date="1457847193446" expanded="true" signature="13005:13139" placeholder="INSERT INTO friend... " />
+            <marker date="1457847193446" expanded="true" signature="13080:13116" placeholder="SELECT id FR... user" />
+            <marker date="1457847193446" expanded="true" signature="13381:13405" placeholder="UPDATE frien... " />
+            <marker date="1457847193446" expanded="true" signature="13381:13432" placeholder="UPDATE frien... " />
+            <marker date="1457847193446" expanded="true" signature="13722:13741" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="13722:13756" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="13722:13759" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="13871:13890" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="14154:14173" placeholder="INSERT INTO request... " />
+            <marker date="1457847193446" expanded="true" signature="14154:14202" placeholder="INSERT INTO request... " />
+            <marker date="1457847193446" expanded="true" signature="14154:14234" placeholder="INSERT INTO request... " />
+            <marker date="1457847193446" expanded="true" signature="14542:14573" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14590" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14598" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14601" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14619" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14629" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14665" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14668" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14889:14908" placeholder="DELETE FROM " />
+            <marker date="1457847193446" expanded="true" signature="14889:14922" placeholder="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -980,58 +986,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/drinker-server/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5405405">
-          <caret line="126" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="506" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.8108108">
+          <caret line="121" column="31" selection-start-line="121" selection-start-column="31" selection-end-line="121" selection-end-column="31" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <element signature="e#2150#2244#0" expanded="false" />
-            <element signature="e#8887#9429#0" expanded="false" />
-            <element signature="e#9478#9597#0" expanded="false" />
-            <marker date="1457847103843" expanded="true" signature="2696:2779" placeholder="INSERT INTO user... " />
-            <marker date="1457847103843" expanded="true" signature="3256:3291" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="3846:3926" placeholder="UPDATE user " />
-            <marker date="1457847103843" expanded="true" signature="3853:3878" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="5030:5235" placeholder="SELECT bar.*... bar" />
-            <marker date="1457847103843" expanded="true" signature="5513:5633" placeholder="INSERT INTO bar... " />
-            <marker date="1457847103843" expanded="true" signature="7146:7325" placeholder="SELECT bar.*... bar" />
-            <marker date="1457847103843" expanded="true" signature="8613:8701" placeholder="INSERT INTO rating... " />
-            <marker date="1457847103843" expanded="true" signature="9215:9303" placeholder="INSERT INTO rating... " />
-            <marker date="1457847103843" expanded="true" signature="9739:9893" placeholder="SELECT * FRO... bar" />
-            <marker date="1457847103843" expanded="true" signature="9739:9914" placeholder="SELECT * FRO... bar" />
-            <marker date="1457847103843" expanded="true" signature="9739:9924" placeholder="SELECT * FRO... bar" />
-            <marker date="1457847103843" expanded="true" signature="9753:9756" placeholder="INSERT INTO rating... " />
-            <marker date="1457847103843" expanded="true" signature="10886:11063" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="10886:11084" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="10886:11094" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="11162:11364" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="11938:12061" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="11938:12118" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="12216:12374" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="12470:12623" placeholder="SELECT * FRO... user" />
-            <marker date="1457847103843" expanded="true" signature="13004:13022" placeholder="INSERT INTO friend... " />
-            <marker date="1457847103843" expanded="true" signature="13004:13052" placeholder="INSERT INTO friend... " />
-            <marker date="1457847103843" expanded="true" signature="13004:13128" placeholder="INSERT INTO friend... " />
-            <marker date="1457847103843" expanded="true" signature="13004:13138" placeholder="INSERT INTO friend... " />
-            <marker date="1457847103843" expanded="true" signature="13079:13115" placeholder="SELECT id FR... user" />
-            <marker date="1457847103843" expanded="true" signature="13380:13404" placeholder="UPDATE frien... " />
-            <marker date="1457847103843" expanded="true" signature="13380:13431" placeholder="UPDATE frien... " />
-            <marker date="1457847103843" expanded="true" signature="13721:13740" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="13721:13755" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="13721:13758" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="13870:13889" placeholder="SELECT * FRO... drink" />
-            <marker date="1457847103843" expanded="true" signature="14153:14172" placeholder="INSERT INTO request... " />
-            <marker date="1457847103843" expanded="true" signature="14153:14201" placeholder="INSERT INTO request... " />
-            <marker date="1457847103843" expanded="true" signature="14153:14233" placeholder="INSERT INTO request... " />
-            <marker date="1457847103843" expanded="true" signature="14541:14572" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14589" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14597" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14600" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14618" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14628" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14664" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14541:14667" placeholder="SELECT user.... user" />
-            <marker date="1457847103843" expanded="true" signature="14888:14907" placeholder="DELETE FROM " />
-            <marker date="1457847103843" expanded="true" signature="14888:14921" placeholder="DELETE FROM " />
+            <element signature="e#8888#9430#0" expanded="false" />
+            <element signature="e#9479#9598#0" expanded="false" />
+            <marker date="1457847193446" expanded="true" signature="2696:2779" placeholder="INSERT INTO user... " />
+            <marker date="1457847193446" expanded="true" signature="3256:3291" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="3847:3927" placeholder="UPDATE user " />
+            <marker date="1457847193446" expanded="true" signature="3854:3879" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="5031:5236" placeholder="SELECT bar.*... bar" />
+            <marker date="1457847193446" expanded="true" signature="5514:5634" placeholder="INSERT INTO bar... " />
+            <marker date="1457847193446" expanded="true" signature="7147:7326" placeholder="SELECT bar.*... bar" />
+            <marker date="1457847193446" expanded="true" signature="8614:8702" placeholder="INSERT INTO rating... " />
+            <marker date="1457847193446" expanded="true" signature="9216:9304" placeholder="INSERT INTO rating... " />
+            <marker date="1457847193446" expanded="true" signature="9740:9894" placeholder="SELECT * FRO... bar" />
+            <marker date="1457847193446" expanded="true" signature="9740:9915" placeholder="SELECT * FRO... bar" />
+            <marker date="1457847193446" expanded="true" signature="9740:9925" placeholder="SELECT * FRO... bar" />
+            <marker date="1457847193446" expanded="true" signature="9754:9757" placeholder="INSERT INTO rating... " />
+            <marker date="1457847193446" expanded="true" signature="10887:11064" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="10887:11085" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="10887:11095" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="11163:11365" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="11939:12062" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="11939:12119" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="12217:12375" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="12471:12624" placeholder="SELECT * FRO... user" />
+            <marker date="1457847193446" expanded="true" signature="13005:13023" placeholder="INSERT INTO friend... " />
+            <marker date="1457847193446" expanded="true" signature="13005:13053" placeholder="INSERT INTO friend... " />
+            <marker date="1457847193446" expanded="true" signature="13005:13129" placeholder="INSERT INTO friend... " />
+            <marker date="1457847193446" expanded="true" signature="13005:13139" placeholder="INSERT INTO friend... " />
+            <marker date="1457847193446" expanded="true" signature="13080:13116" placeholder="SELECT id FR... user" />
+            <marker date="1457847193446" expanded="true" signature="13381:13405" placeholder="UPDATE frien... " />
+            <marker date="1457847193446" expanded="true" signature="13381:13432" placeholder="UPDATE frien... " />
+            <marker date="1457847193446" expanded="true" signature="13722:13741" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="13722:13756" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="13722:13759" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="13871:13890" placeholder="SELECT * FRO... drink" />
+            <marker date="1457847193446" expanded="true" signature="14154:14173" placeholder="INSERT INTO request... " />
+            <marker date="1457847193446" expanded="true" signature="14154:14202" placeholder="INSERT INTO request... " />
+            <marker date="1457847193446" expanded="true" signature="14154:14234" placeholder="INSERT INTO request... " />
+            <marker date="1457847193446" expanded="true" signature="14542:14573" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14590" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14598" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14601" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14619" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14629" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14665" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14542:14668" placeholder="SELECT user.... user" />
+            <marker date="1457847193446" expanded="true" signature="14889:14908" placeholder="DELETE FROM " />
+            <marker date="1457847193446" expanded="true" signature="14889:14922" placeholder="DELETE FROM " />
           </folding>
         </state>
       </provider>

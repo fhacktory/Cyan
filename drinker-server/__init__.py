@@ -110,7 +110,7 @@ class Api(object):
 
     def user_update_coord(self, data, email):
         """
-            GET: /user/<email>
+            POST: /user/<email>
             Update user coordinates
         """
         if 'lat' not in request.args or 'long' not in request.args:
