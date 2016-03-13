@@ -358,10 +358,9 @@ class Api(object):
 
         current_friends = db_query("""
             SELECT user.* FROM user
-            JOIN friend ON user.id = friend.friend_id OR user.id = friend.user_id
-            WHERE friend.status = 'accepted'
-             AND user.id = %s;
-        """, request.args.get('user_id'))
+            WHERE user.id IN (SELECT friend.user_id FROM friend WHERE friend_id = %s AND friend.status = 'accepted')
+               OR user.id IN (SELECT friend.friend_id FROM friend WHERE user_id = %s AND friend.status = 'accepted');
+        """, request.args.get('user_id'), request.args.get('user_id'))
 
         requested_friends = db_query("""
             SELECT user.* FROM user
