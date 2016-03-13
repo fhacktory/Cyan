@@ -112,7 +112,8 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
 
         barFactory.sendBar().get({lat:lat, long:long}).$promise
         .then(function(data){
-
+          $scope.bars = data.data;
+          console.log($scope.bars);
         });
 
         console.log(lat + " - " + long);
@@ -134,19 +135,12 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
         console.log(err);
       });
     })
-
-    barFactory.getBars().get().$promise
-    .then(function(data){
-    	$scope.bars = data.data;
-      console.log($scope.bars);
-    });
-
-
-  }])
+    }])
 
 .controller('BarController', ['$scope', '$stateParams', 'barFactory', function($scope, $stateParams, barFactory) {
 
         $scope.bar = {};
+        $scope.barData = {};
         barFactory.getBar().get({id:parseInt($stateParams.id,10)}).$promise
          .then(function(data){
          	 $scope.bar = data.data;
@@ -159,7 +153,35 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
              console.log($scope.drinks);
            });
          });
+
+         $scope.doRating = function() {
+           barFactory.sendRating().get({id:$scope.bar.id, rating:$scope.barData.rating, user:"11"}).$promise
+           .then(function(data){
+             $scope.bars = data.data;
+             console.log($scope.bars);
+           });
+           console.log($scope.barData);
+         }
       }])
+
+.controller('SearchController', ['$scope', 'searchFactory', function ($scope, searchFactory) {
+  $scope.searcher = {};
+  $scope.search = function () {
+    console.log($scope.searcher.text);
+    searchFactory.getSearchs().get({text:$scope.searcher.text}).$promise
+    .then(function(data){
+      $scope.searchs = data.data;
+      console.log($scope.searchs);
+      $scope.bars = $scope.searchs.bar;
+      $scope.drinks = $scope.searchs.drink;
+      console.log('test drinks');
+    })
+  }
+
+  $scope.doRating = function() {
+
+  }
+}])
 
 .controller('AboutController', ['$scope', 'corporateFactory', 'leaders', 'baseURL', function($scope, corporateFactory, leaders, baseURL) {
 

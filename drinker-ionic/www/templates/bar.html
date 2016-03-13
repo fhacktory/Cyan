@@ -9,7 +9,11 @@
           <div class="item item-body item-text-wrap">
                <img class="full-image" ng-src="{{baseURL+dish.image}}" alt="{{bar.name}}">
                 <h2>{{bar.name}}
-                 <span style="font-size:75%">{{bar.price }}</span></h2>
+                 <span style="font-size:75%">{{bar.price}} / {{bar.mark}}</span>
+                 <select ng-model="barData.rating" ng-change="doRating()">
+                    <option ng-repeat="n in [1,2,3,4,5]" value="{{n}}">{{n}}</option>
+                </select>
+                 </h2>
                 <p>{{bar.description}}</p>
           </div>
       </div>
@@ -19,7 +23,7 @@
                     <ul class="list">
                         <li ng-repeat="drink in drinks">
                           <blockquote>
-                             <p>{{drink.name}}aaa</p>
+                             <p>{{drink.name}}</p>
                              <p>{{drink.description}}</p>
                           </blockquote>
                         </li>

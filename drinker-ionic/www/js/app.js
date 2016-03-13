@@ -78,6 +78,16 @@ views: {
 }
 })
 
+.state('app.search', {
+url: '/search',
+views: {
+  'mainContent': {
+    templateUrl: 'templates/search.html',
+    controller: 'SearchController',
+  }
+}
+})
+
   .state('app.aboutus', {
       url: '/aboutus',
       views: {

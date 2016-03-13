@@ -4,6 +4,8 @@
       <ion-list>
         <ion-list>
           <ion-item ng-repeat="bar in bars" href="#/app/bar/{{bar.id}}" class="item-thumbnail-left">
+            <img ng-if="bar.picture != null" ng-src="{{bar.picture}}">
+            <img ng-if="bar.picture == null" ng-src="https://image.freepik.com/icones-gratuites/point-d&-39;interrogation_318-52837.jpg">
             <h2>{{bar.name}}
              <span style="font-size:75%">{{bar.price}}</span>
             </h2>
