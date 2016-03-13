@@ -400,7 +400,7 @@ class Api(object):
         db_query("""
              INSERT INTO friend ( user_id, friend_id, status)
              VALUES (%s, (SELECT id FROM user WHERE email = %s), 'pending');
-        """, request.args.get('user_id'), user_mail)
+        """, user_id, user_mail)
 
         return "Friend request sent"
 
