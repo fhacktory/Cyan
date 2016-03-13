@@ -110,23 +110,21 @@ class Api(object):
 
     def user_update_coord(self, data, email):
         """
-            PUT: /user/<email>
+            GET: /user/<email>
             Update user coordinates
         """
-        if 'latposition' not in data:
-            raise Exception('No latposition send')
-        if 'longposition' not in data:
-            raise Exception('No longposition send')
+        if 'lat' not in request.args or 'long' not in request.args:
+            raise Exception('Motherfucka get da chopa !')
 
         db_query("""
             UPDATE user SET latposition = %s, longposition = %s
             WHERE email = %s;
-        """, data['latposition'], data['longposition'], email)
+        """, request.args.get('lat'), request.args.get('long'), email)
 
         request.args = dict(request.args)
         request.args.update({
-            'lat': data['latposition'],
-            'long': data['longposition']
+            'lat': request.args.get('lat'),
+            'long': request.args.get('long')
         })
 
         return self.bar_list(data)
