@@ -13,7 +13,27 @@ angular.module('Drinker.services', ['ngResource'])
           this.getLogin = function () {
                     return $resource(testURL+"/user/:mail");
           };
+
           //return $resource(testURL + "/user/:mail");
+        }])
+
+        .service('barFactory', ['$resource', 'testURL', function($resource, testURL) {
+
+          this.getBars = function(){
+                return $resource(testURL+"/bar",null);
+            };
+
+          this.getBar = function(){
+                return $resource(testURL+"/bar/:id",null);
+            };
+
+            this.sendBar = function(){
+                  return $resource(testURL+"/bar?lat=:lat&long=:long",null);
+              };
+
+          this.getDrinks = function(){
+                return $resource(testURL+"/drink?bar_id=:id",null);
+            };
         }])
 
         .factory('menuFactory', ['$resource', 'baseURL', function ($resource, baseURL) {

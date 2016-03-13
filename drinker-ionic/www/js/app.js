@@ -68,6 +68,16 @@ views: {
 }
 })
 
+.state('app.bar', {
+url: '/bar/:id',
+views: {
+  'mainContent': {
+    templateUrl: 'templates/bar.html',
+    controller: 'BarController',
+  }
+}
+})
+
   .state('app.aboutus', {
       url: '/aboutus',
       views: {
@@ -92,17 +102,12 @@ views: {
       }
     })
 
-    .state('app.menu', {
-      url: '/menu',
+    .state('app.friend', {
+      url: '/friend',
       views: {
         'mainContent': {
-          templateUrl: 'templates/menu.html',
-          controller: 'MenuController',
-          resolve: {
-              dishes:  ['menuFactory', function(menuFactory){
-                return menuFactory.query();
-              }]
-          }
+          templateUrl: 'templates/friend.html',
+          controller: 'FriendController',
         }
       }
     })
@@ -113,14 +118,6 @@ views: {
         'mainContent': {
           templateUrl: 'templates/favorites.html',
           controller:'FavoritesController',
-          resolve: {
-              dishes:  ['menuFactory', function(menuFactory){
-                return menuFactory.query();
-              }],
-              favorites: ['favoriteFactory', function(favoriteFactory) {
-                  return favoriteFactory.getFavorites();
-              }]
-          }
         }
       }
     });

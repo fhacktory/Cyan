@@ -44,17 +44,11 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   };
 })
 
-.controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory',
-'dishes', 'baseURL', '$ionicListDelegate', function ($scope, menuFactory,
-  favoriteFactory, dishes, baseURL, $ionicListDelegate) {
+.controller('FriendController', ['$scope', 'baseURL', '$ionicListDelegate', function ($scope, baseURL, $ionicListDelegate) {
     $scope.baseURL = baseURL;
 
     $scope.tab = 1;
     $scope.filtText = '';
-    $scope.showDetails = false;
-    $scope.showMenu = false;
-    $scope.message = "Loading ...";
-    $scope.dishes = dishes
 
     $scope.select = function(setTab) {
         $scope.tab = setTab;
@@ -88,38 +82,6 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     }
 }])
 
-.controller('ContactController', ['$scope', function($scope) {
-
-    $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
-
-    var channels = [{value:"tel", label:"Tel."}, {value:"Email",label:"Email"}];
-
-    $scope.channels = channels;
-    $scope.invalidChannelSelection = false;
-
-}])
-
-.controller('FeedbackController', ['$scope', 'feedbackFactory', function($scope,feedbackFactory) {
-
-    $scope.sendFeedback = function() {
-
-        console.log($scope.feedback);
-
-        if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
-            $scope.invalidChannelSelection = true;
-            console.log('incorrect');
-        }
-        else {
-            $scope.invalidChannelSelection = false;
-            feedbackFactory.save($scope.feedback);
-            $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
-            $scope.feedback.mychannel="";
-            $scope.feedbackForm.$setPristine();
-            console.log($scope.feedback);
-        }
-    };
-}])
-
 .controller('IndexController', ['$scope', 'signinFactory', function ($scope, signinFactory) {
     $scope.signinData = {};
     $scope.doSignin = function() {
@@ -132,7 +94,7 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     };
 }])
 
-.controller('DashController', ['$scope', 'signinFactory', '$cordovaGeolocation', '$ionicLoading', '$ionicPlatform', function ($scope, signinFactory, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+.controller('DashController', ['$scope', 'signinFactory', 'barFactory', '$cordovaGeolocation', '$ionicLoading', '$ionicPlatform', function ($scope, signinFactory, barFactory, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
   ionic.Platform.ready(function(){
     $ionicLoading.show({
         template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
@@ -147,6 +109,12 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
         var lat  = position.coords.latitude;
         var long = position.coords.longitude;
+
+        barFactory.sendBar().get({lat:lat, long:long}).$promise
+        .then(function(data){
+
+        });
+
         console.log(lat + " - " + long);
         var myLatlng = new google.maps.LatLng(lat, long);
 
@@ -166,7 +134,32 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
         console.log(err);
       });
     })
+
+    barFactory.getBars().get().$promise
+    .then(function(data){
+    	$scope.bars = data.data;
+      console.log($scope.bars);
+    });
+
+
   }])
+
+.controller('BarController', ['$scope', '$stateParams', 'barFactory', function($scope, $stateParams, barFactory) {
+
+        $scope.bar = {};
+        barFactory.getBar().get({id:parseInt($stateParams.id,10)}).$promise
+         .then(function(data){
+         	 $scope.bar = data.data;
+           console.log($scope.bar);
+
+           barFactory.getDrinks().get({id:$scope.bar.id}).$promise
+           .then(function(data){
+           	 $scope.drinks = data.data;
+             console.log('test drinks');
+             console.log($scope.drinks);
+           });
+         });
+      }])
 
 .controller('AboutController', ['$scope', 'corporateFactory', 'leaders', 'baseURL', function($scope, corporateFactory, leaders, baseURL) {
 
@@ -185,9 +178,7 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   $scope.shouldShowDelete = false;
 
   $scope.favorites = favorites;
-
   $scope.dishes = dishes;
-
     $ionicLoading.show({
         template: '<ion-spinner></ion-spinner> Loading...'
     });
