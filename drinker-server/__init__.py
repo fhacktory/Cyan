@@ -365,24 +365,24 @@ class Api(object):
             raise Exception('No user')
 
         current_friends = db_query("""
-            SELECT * FROM user
+            SELECT user.* FROM user
             JOIN friend ON user.id = friend.friend_id OR user.id = friend.user_id
             WHERE friend.status = 'accepted'
              AND user.id = %s;
         """, request.args.get('user_id'))
 
         requested_friends = db_query("""
-            SELECT * FROM user
-            JOIN friend ON user.id = friend.user_id
+            SELECT user.* FROM user
+            JOIN friend ON user.id = friend.friend_id
             WHERE friend.status = 'pending'
-             AND user.id = %s;
+             AND friend.user_id = %s;
         """, request.args.get('user_id'))
 
         pending_friends = db_query("""
             SELECT * FROM user
-            JOIN friend ON user.id = friend.friend_id
+            JOIN friend ON user.id = friend.user_id
             WHERE friend.status = 'pending'
-             AND user.id = %s;
+             AND friend.friend_id = %s;
         """, request.args.get('user_id'))
 
         return {
