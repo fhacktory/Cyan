@@ -7,7 +7,7 @@
   <ion-content>
       <div class="card">
           <div class="item item-body item-text-wrap">
-               <img class="full-image" ng-src="{{baseURL+dish.image}}" alt="{{bar.name}}">
+               <img class="full-image" ng-src="{{bar.picture}}" alt="{{bar.name}}">
                 <h2>{{bar.name}}
                  <span style="font-size:75%">{{bar.price}} / {{bar.mark}}</span>
                  <select ng-model="barData.rating" ng-change="doRating()">

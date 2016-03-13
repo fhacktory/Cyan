@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus  enable-menu-with-back-views="false">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-royal">
       <ion-nav-back-button>
@@ -16,25 +16,28 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/dash">
+        <ion-item menu-close href="#/app/dash" ng-if="loginData.email">
           Dashboard
         </ion-item>
-        <ion-item menu-close href="#/app/search">
+        <ion-item menu-close href="#/app/search" ng-if="loginData.email">
           Search
         </ion-item>
-        <ion-item menu-close href="#/app/friend">
+        <ion-item menu-close href="#/app/friend" ng-if="loginData.email">
           Friend
         </ion-item>
-        <ion-item menu-close href="#/app/favorites">
+        <ion-item menu-close href="#/app/favorites" ng-if="loginData.email">
          My Favorites
        </ion-item>
-        <ion-item menu-close ng-click="login()">
+        <ion-item menu-close ng-click="login()" ng-if="!loginData.email">
           Login
         </ion-item>
-       <ion-item menu-close href="#/app/contactus">
+        <ion-item menu-close ng-click="logout()" ng-if="loginData.email">
+          Logout
+        </ion-item>
+       <ion-item menu-close href="#/app/contactus" >
          Contact Us
        </ion-item>
-       <ion-item menu-close href="#/app/aboutus">
+       <ion-item menu-close href="#/app/aboutus" >
          About Us
        </ion-item>
       </ion-list>

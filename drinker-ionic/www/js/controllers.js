@@ -1,5 +1,5 @@
 angular.module('Drinker.controllers', ['ionic','ngCordova'])
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $state, loginFactory) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $state, loginFactory, $ionicHistory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -26,6 +26,20 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   // Open the login modal
   $scope.login = function() {
     $scope.modal.show();
+
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
+    $state.go("app.home", {}, {reload: true});
+  };
+
+  $scope.logout = function() {
+    console.log('Doing logout');
+    $localStorage.storeObject('userinfo',{});
+
+    $ionicHistory.clearHistory();
+    $ionicHistory.nextViewOptions({ disableBack: true, historyRoot: true });
+    $state.go("app.home", {}, {reload: true});
   };
 
   // Perform the login action when the user submits the login form
@@ -37,7 +51,10 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
       $localStorage.storeObject('userinfo',$scope.user);
     });
 
-    $state.go("app.dash");
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
+    $state.go("app.dash", {}, {reload: true});
 
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
@@ -95,13 +112,20 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     };
 }])
 
-.controller('IndexController', ['$scope', 'signinFactory', function ($scope, signinFactory) {
+.controller('IndexController', ['$scope', 'signinFactory', '$localStorage', '$state', '$ionicHistory',  function ($scope, signinFactory, $localStorage, $state, $ionicHistory) {
     $scope.signinData = {};
     $scope.doSignin = function() {
       console.log('Doing signin', $scope.signinData);
       var signin = new signinFactory($scope.signinData);
       signin.$save()
-      .then(function(res)  { console.log("signin") })
+      .then(function(res)  {
+        console.log("signin")
+        $localStorage.storeObject('userinfo',res.data);
+        $ionicHistory.nextViewOptions({
+          disableBack: true
+        });
+        $state.go("app.dash", {}, {reload: true});
+      })
       .catch(function(req) { console.log("error saving obj"); })
     };
 }])
@@ -113,7 +137,7 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     });
 
     var posOptions = {
-        enableHighAccuracy: true,
+        enableHighAccuracy: false,
         timeout: 20000,
         maximumAge: 0
     };
@@ -158,7 +182,7 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     })
     }])
 
-.controller('BarController', ['$scope', '$stateParams', 'barFactory', '$localStorage', function($scope, $stateParams, barFactory, $localStorage) {
+.controller('BarController', ['$scope', '$stateParams', 'barFactory', '$localStorage', '$ionicHistory', '$state', function($scope, $stateParams, barFactory, $localStorage, $ionicHistory, $state) {
 
         $scope.bar = {};
         $scope.barData = {};
@@ -181,6 +205,10 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
            .then(function(data){
              $scope.bars = data.data;
              console.log($scope.bars);
+             $ionicHistory.nextViewOptions({
+               disableBack: true
+             });
+             $state.go("app.dash", {}, {reload: true});
            });
            console.log($scope.barData);
          }

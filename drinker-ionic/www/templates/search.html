@@ -1,4 +1,4 @@
-<ion-view view-title="Search">
+<ion-view  view-title="Search">
   <ion-content>
     <div class="card">
         <div class="item item-divider">
@@ -19,12 +19,12 @@
             Bar 's results
         </div>
         <div class="list">
-          <div class="item-thumbnail-left item item-text-wrap item-avatar" ng-repeat="bar in bars">
+          <ion-item class="item-thumbnail-left item item-text-wrap item-avatar" ng-repeat="bar in bars" href="#/app/bar/{{bar.id}}">
             <img ng-if="bar.picture != null" ng-src="{{bar.picture}}">
             <img ng-if="bar.picture == null" ng-src="https://image.freepik.com/icones-gratuites/point-d&-39;interrogation_318-52837.jpg">
                 <h2>{{bar.name}}</h2>
                 <p>{{bar.description}}</p>
-          </div>
+          </ion-item>
         </div>
         <div class="item item-divider">
             Drink 's results
