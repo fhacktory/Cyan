@@ -284,6 +284,15 @@ class Api(object):
 
         return 'OK'
 
+    def search_none(self, data, text):
+        """
+            GET: /search/
+        """
+        return {
+            'bar': None,
+            'drink': None
+        }
+
     def search_bar_drink(self, data, text):
         """
             GET: /search/<text>
