@@ -1,4 +1,4 @@
-<ion-view view-title="Menu">
+<ion-view view-title="Friends">
   <div class="tabs-striped tabs-color-royal">
    <ul class="tabs">
        <li ng-class="{active:isSelected(1)}" class="tab-item">
@@ -6,22 +6,29 @@
        <li ng-class="{active:isSelected(2)}" class="tab-item">
            <a ng-click="select(2)">Friends</a></li>
        <li ng-class="{active:isSelected(3)}" class="tab-item">
-           <a ng-click="select(3)">Friends request</a></li>
+           <a ng-click="select(3)">Request</a></li>
        <li ng-class="{active:isSelected(4)}" class="tab-item">
-           <a ng-click="select(4)">Other</a></li>
+           <a ng-click="select(4)">Pending</a></li>
    </ul>
   </div>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="dish in dishes | filter:{category: filtText}" href="#/app/menu/{{dish.id}}" class="item-thumbnail-left">
-        <img ng-src="{{baseURL+dish.image}}">
-        <h2>{{dish.name}}
-         <span style="font-size:75%">{{dish.price | currency}}</span>
-        <span class="badge badge-assertive">{{dish.label}}</span></h2>
-        <p>{{dish.description}}</p>
-        <ion-option-button class="button-assertive icon ion-plus-circled"
-            ng-click="addFavorite({{dish.id}})">
-        </ion-option-button>
+      <ion-item ng-repeat="current in currents" class="item-thumbnail-left">
+        <img ng-src="{{current.picture}}">
+        <h2>Vous êtes ami avec {{current.first_name}} {{request.last_name}}</h2>
+        <p>{{current.description}}</p>
+      </ion-item>
+      <ion-item ng-repeat="pending in pendings" class="item-thumbnail-left">
+        <img ng-src="{{pending.picture}}">
+        <h2>{{pending.first_name}} {{request.last_name}}</h2>
+        <p>{{pending.description}}</p>
+        <p><span ng-click="acceptFriend(pending.id)">Accept</span> | Refuse</p>
+      </ion-item>
+      <ion-item ng-repeat="request in requests" class="item-thumbnail-left">
+        <img ng-src="{{request.picture}}">
+        <h2>{{request.first_name}} {{request.last_name}}</h2>
+        <p>{{request.description}}</p>
+        <p>En attente</p>
       </ion-item>
     </ion-list>
   </ion-content>

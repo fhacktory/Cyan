@@ -20,10 +20,10 @@
         </div>
         <div class="list">
           <div class="item-thumbnail-left item item-text-wrap item-avatar" ng-repeat="bar in bars">
-                <img ng-src="{{baseURL+leader.image}}" alt="{{result.name}}">
+            <img ng-if="bar.picture != null" ng-src="{{bar.picture}}">
+            <img ng-if="bar.picture == null" ng-src="https://image.freepik.com/icones-gratuites/point-d&-39;interrogation_318-52837.jpg">
                 <h2>{{bar.name}}</h2>
-                <h3>{{search.designation}}</h3>
-                <p>{{search.description}}</p>
+                <p>{{bar.description}}</p>
           </div>
         </div>
         <div class="item item-divider">
@@ -31,10 +31,22 @@
         </div>
         <div class="list">
           <div class="item-thumbnail-left item item-text-wrap item-avatar" ng-repeat="drink in drinks">
-                <img ng-src="{{baseURL+leader.image}}" alt="{{result.name}}">
+            <img ng-if="drink.picture != null" ng-src="{{drink.picture}}">
+            <img ng-if="drink.picture == null" ng-src="https://image.freepik.com/icones-gratuites/point-d&-39;interrogation_318-52837.jpg">
                 <h2>{{drink.name}}</h2>
-                <h3>{{search.designation}}</h3>
-                <p>{{search.description}}</p>
+                <p>{{drink.description}}</p>
+          </div>
+        </div>
+        <div class="item item-divider">
+            User 's results
+        </div>
+        <div class="list">
+          <div class="item-thumbnail-left item item-text-wrap item-avatar" ng-repeat="user in users">
+            <img ng-if="user.picture != null" ng-src="{{user.picture}}">
+            <img ng-if="user.picture == null" ng-src="https://image.freepik.com/icones-gratuites/point-d&-39;interrogation_318-52837.jpg">
+                <h2>{{user.email}}</h2>
+                <p>{{user.first_name}} {{user.last_name}}</p>
+                <p ng-click="addFriend(user.email)">Add</p>
           </div>
         </div>
     </div>

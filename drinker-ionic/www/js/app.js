@@ -127,7 +127,7 @@ views: {
       views: {
         'mainContent': {
           templateUrl: 'templates/favorites.html',
-          controller:'FavoritesController',
+          controller:'',
         }
       }
     });

@@ -9,7 +9,7 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   //});
 
   // Form data for the login modal
-  $scope.loginData = {};
+  $scope.loginData = $localStorage.getObject('userinfo','{}');
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -31,9 +31,12 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
-    //var signin = new loginFactory($scope.loginData);
-    console.log($scope.loginData.email);
-    $scope.login = loginFactory.getLogin().get({mail:$scope.loginData.email});
+    loginFactory.getLogin().get({mail:$scope.loginData.email}).$promise
+    .then(function(data){
+      $scope.user = data.data;
+      $localStorage.storeObject('userinfo',$scope.user);
+    });
+
     $state.go("app.dash");
 
     // Simulate a login delay. Remove this and replace with your login
@@ -44,23 +47,39 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   };
 })
 
-.controller('FriendController', ['$scope', 'baseURL', '$ionicListDelegate', function ($scope, baseURL, $ionicListDelegate) {
-    $scope.baseURL = baseURL;
-
+.controller('FriendController', ['$scope', 'friendFactory', 'searchFactory', '$localStorage', function ($scope, friendFactory, searchFactory, $localStorage) {
     $scope.tab = 1;
     $scope.filtText = '';
+    $scope.user = $localStorage.getObject('userinfo','{}');
+    console.log($scope.user);
+    friendFactory.getFriends().get({user:$scope.user.id}).$promise
+    .then(function(data){
+      $scope.friends = data.data;
+      console.log('test friends');
+      console.log($scope.friends);
+      $scope.currents = $scope.friends.current;
+      $scope.pendings = $scope.friends.pending;
+      $scope.requests = $scope.friends.request;
+    });
+
+    $scope.acceptFriend = function(index) {
+      searchFactory.sendFriend().get({id:index}).$promise
+      .then(function(data){
+        console.log("accepted");
+      });
+    }
 
     $scope.select = function(setTab) {
         $scope.tab = setTab;
 
         if (setTab === 2) {
-            $scope.filtText = "appetizer";
+            $scope.filtText = "Friends";
         }
         else if (setTab === 3) {
-            $scope.filtText = "mains";
+            $scope.filtText = "Request";
         }
         else if (setTab === 4) {
-            $scope.filtText = "dessert";
+            $scope.filtText = "Pending";
         }
         else {
             $scope.filtText = "";
@@ -74,12 +93,6 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     $scope.toggleDetails = function() {
         $scope.showDetails = !$scope.showDetails;
     };
-
-    $scope.addFavorite = function (index) {
-        console.log("index is " + index);
-        favoriteFactory.addToFavorites(index);
-        $ionicListDelegate.closeOptionButtons();
-    }
 }])
 
 .controller('IndexController', ['$scope', 'signinFactory', function ($scope, signinFactory) {
@@ -90,11 +103,10 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
       signin.$save()
       .then(function(res)  { console.log("signin") })
       .catch(function(req) { console.log("error saving obj"); })
-      .finally(function()  { console.log("always called") });;
     };
 }])
 
-.controller('DashController', ['$scope', 'signinFactory', 'barFactory', '$cordovaGeolocation', '$ionicLoading', '$ionicPlatform', function ($scope, signinFactory, barFactory, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
+.controller('DashController', ['$scope', 'signinFactory', 'barFactory', 'dashFactory', '$localStorage', '$cordovaGeolocation', '$ionicLoading', '$ionicPlatform', function ($scope, signinFactory, barFactory, dashFactory, $localStorage, $cordovaGeolocation, $ionicLoading, $ionicPlatform) {
   ionic.Platform.ready(function(){
     $ionicLoading.show({
         template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Acquiring location!'
@@ -110,11 +122,20 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
         var lat  = position.coords.latitude;
         var long = position.coords.longitude;
 
-        barFactory.sendBar().get({lat:lat, long:long}).$promise
+         $scope.user = $localStorage.getObject('userinfo','{}');
+
+         var dash = new dashFactory();
+         dash.$save({lat:lat, long:long, mail:$scope.user.email})
+         .then(function(res)  { console.log("signin");
+          $scope.bars = res.data;
+          })
+         .catch(function(req) { console.log("error saving obj"); })
+         /*
+        barFactory.sendBar().$get({lat:lat, long:long, mail:$scope.user.email}).$promise
         .then(function(data){
           $scope.bars = data.data;
           console.log($scope.bars);
-        });
+        });*/
 
         console.log(lat + " - " + long);
         var myLatlng = new google.maps.LatLng(lat, long);
@@ -137,7 +158,7 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     })
     }])
 
-.controller('BarController', ['$scope', '$stateParams', 'barFactory', function($scope, $stateParams, barFactory) {
+.controller('BarController', ['$scope', '$stateParams', 'barFactory', '$localStorage', function($scope, $stateParams, barFactory, $localStorage) {
 
         $scope.bar = {};
         $scope.barData = {};
@@ -155,7 +176,8 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
          });
 
          $scope.doRating = function() {
-           barFactory.sendRating().get({id:$scope.bar.id, rating:$scope.barData.rating, user:"11"}).$promise
+           $scope.user = $localStorage.getObject('userinfo','{}');
+           barFactory.sendRating().get({id:$scope.bar.id, rating:$scope.barData.rating, user:$scope.user.id}).$promise
            .then(function(data){
              $scope.bars = data.data;
              console.log($scope.bars);
@@ -164,7 +186,7 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
          }
       }])
 
-.controller('SearchController', ['$scope', 'searchFactory', function ($scope, searchFactory) {
+.controller('SearchController', ['$scope', 'searchFactory', '$localStorage', function ($scope, searchFactory, $localStorage) {
   $scope.searcher = {};
   $scope.search = function () {
     console.log($scope.searcher.text);
@@ -174,12 +196,18 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
       console.log($scope.searchs);
       $scope.bars = $scope.searchs.bar;
       $scope.drinks = $scope.searchs.drink;
+      $scope.users = $scope.searchs.user;
       console.log('test drinks');
     })
   }
 
-  $scope.doRating = function() {
-
+  $scope.addFriend = function(index) {
+    console.log(2);
+    $scope.user = $localStorage.getObject('userinfo','{}');
+    searchFactory.sendFriend().get({mail:index, id:$scope.user.id}).$promise
+    .then(function(data){
+      console.log("good");
+    });
   }
 }])
 
@@ -190,74 +218,5 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
     console.log($scope.leaders);
 
 }])
-
-.controller('FavoritesController', ['$scope', 'dishes', 'favorites', "menuFactory",
-'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup',
-'$ionicLoading', '$timeout', function ($scope, dishes, favorites, menuFactory,
-  favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading,
-  $timeout) {
-  $scope.baseURL = baseURL;
-  $scope.shouldShowDelete = false;
-
-  $scope.favorites = favorites;
-  $scope.dishes = dishes;
-    $ionicLoading.show({
-        template: '<ion-spinner></ion-spinner> Loading...'
-    });
-
-    $scope.favorites = favoriteFactory.getFavorites();
-
-    $scope.dishes = menuFactory.query(
-      function (response) {
-          $scope.dishes = response;
-          $timeout(function () {
-              $ionicLoading.hide();
-          }, 1000);
-      },
-      function (response) {
-          $scope.message = "Error: " + response.status + " " + response.statusText;
-          $timeout(function () {
-              $ionicLoading.hide();
-          }, 1000);
-    });
-
-    console.log($scope.dishes, $scope.favorites);
-
-    $scope.toggleDelete = function () {
-        $scope.shouldShowDelete = !$scope.shouldShowDelete;
-        console.log($scope.shouldShowDelete);
-    }
-
-    $scope.deleteFavorite = function (index) {
-        var confirmPopup = $ionicPopup.confirm({
-            title: 'Confirm Delete',
-            template: 'Are you sure you want to delete this item?'
-        });
-
-        confirmPopup.then(function (res) {
-            if (res) {
-                console.log('Ok to delete' + index + "aa");
-                favoriteFactory.deleteFromFavorites(index);
-            } else {
-                console.log('Canceled delete');
-            }
-        });
-
-        $scope.shouldShowDelete = false;
-
-    }
-}])
-
-.filter('favoriteFilter', function () {
-  return function (dishes, favorites) {
-    var out = [];
-    for (var i = 0; i < favorites.length; i++) {
-      for (var j = 0; j < dishes.length; j++) {
-        if (dishes[j].id === favorites[i].id)
-            out.push(dishes[j]);
-      }
-    }
-    return out;
-}});
 
 ;

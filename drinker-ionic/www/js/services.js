@@ -9,6 +9,10 @@ angular.module('Drinker.services', ['ngResource'])
           return $resource(testURL + "/user");
         }])
 
+        .factory('dashFactory', ['$resource', 'testURL', function($resource, testURL) {
+          return $resource(testURL + "/user/:mail?lat=:lat&long=:long");
+        }])
+
         .service('loginFactory', ['$resource', 'testURL', function($resource, testURL) {
           this.getLogin = function () {
                     return $resource(testURL+"/user/:mail");
@@ -28,7 +32,7 @@ angular.module('Drinker.services', ['ngResource'])
             };
 
             this.sendBar = function(){
-                  return $resource(testURL+"/bar?lat=:lat&long=:long",null);
+                  return $resource(testURL+"/user/:mail?lat=:lat&long=:long",null);
               };
 
           this.getDrinks = function(){
@@ -45,45 +49,21 @@ angular.module('Drinker.services', ['ngResource'])
           this.getSearchs = function(){
                 return $resource(testURL+"/search/:text",null);
             };
+
+            this.sendFriend = function(){
+                  return $resource(testURL+"/friend/:id/:mail",null);
+              };
         }])
 
-        .factory('favoriteFactory', ['$resource', '$localStorage','baseURL', function ($resource, $localStorage, baseURL) {
-            var favFac = {};
-            var favorites = [];
-            var fav = $localStorage.getObject('fav','{}');
+        .service('friendFactory', ['$resource', 'testURL', function($resource, testURL) {
 
-            favFac.addToFavorites = function (index) {
-                for (var i = 0; i < favorites.length; i++) {
-                    if (favorites[i].id == index)
-                        return;
-                }
-                favorites.push({id: index});
-                $localStorage.storeObject('fav',favorites);
+          this.getFriends = function(){
+                return $resource(testURL+"/friend?user_id=:user",null);
             };
 
-            favFac.deleteFromFavorites = function (index) {
-              for (var i = 0; i < favorites.length; i++) {
-                if (favorites[i].id == index) {
-                  favorites.splice(i, 1);
-                }
-              }
-              $localStorage.storeObject('fav',favorites);
-            }
-
-            favFac.getFavorites = function () {
-              favorites = $localStorage.getObject('fav','{}');
-              return favorites;
-            };
-
-            return favFac;
-        }])
-
-        .factory('corporateFactory', ['$resource', 'baseURL', function($resource,baseURL) {
-            return $resource(baseURL+"leadership/:id");
-        }])
-
-        .factory('feedbackFactory', ['$resource', 'baseURL', function($resource,baseURL) {
-            return $resource(baseURL+"feedback/:id");
+            this.getAccept = function(){
+                  return $resource(testURL+"/friend/:id",null);
+              };
         }])
 
         .factory('$localStorage', ['$window', function($window) {
