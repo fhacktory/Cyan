@@ -162,6 +162,7 @@ class Api(object):
                     GROUP BY bar.id;
                 """, result.get('id'))[0]
             except:
+                logger.exception('DEBUG')
                 # if not present insert
                 loc = result.get('geometry', {}).get('location', {})
                 db_id = db_query("""
