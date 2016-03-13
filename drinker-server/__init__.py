@@ -259,7 +259,7 @@ class Api(object):
         db_query("""
             INSERT INTO rating (mark, user_id, bar_id, drink_id)
             VALUES (%s, %s, %s, %s)
-        """, request.args('user_id'),
+        """, request.args.get('user_id'),
              bar_id,
              None,
              rating)
@@ -280,7 +280,7 @@ class Api(object):
         db_query("""
             INSERT INTO rating (mark, user_id, bar_id, drink_id)
             VALUES (%s, %s, %s, %s)
-        """, request.args('user_id'),
+        """, request.args.get('user_id'),
              None,
              drink_id,
              rating)
