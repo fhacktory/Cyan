@@ -1,7 +1,9 @@
+import json
 import re
 import sys
 import logging
 import inspect
+import requests
 import mysql.connector
 from mysql.connector import IntegrityError
 from flask import Flask, request, jsonify
@@ -121,20 +123,86 @@ class Api(object):
             WHERE email = %s;
         """, data['latposition'], data['longposition'], email)
 
-        return self.user_get(data, email=email)
+        request.args = dict(request.args)
+        request.args.update({
+            'lat': data['latposition'],
+            'long': data['longposition']
+        })
+
+        return self.bar_list(data)
 
     def bar_list(self, data):
         """
             GET: /bar
             Get bar list (optional: nearby user)
         """
-        bars = db_query("""
-            SELECT bar.*, avg(rating.mark) as mark FROM bar
-            LEFT JOIN rating ON bar.id = rating.bar_id
-            GROUP BY bar.id;
-        """)
 
-        return bars
+        if 'lat' not in request.args or 'long' not in request.args:
+            raise Exception('Motherfucka get da chopa !')
+
+        # get closest bars
+        data = json.loads(requests.get(
+            'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+            '?location=%s,%s'
+            '&type=bar'
+            '&rankby=distance'
+            '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'
+            % (request.args.get('lat'), request.args.get('long'))
+        ).content)
+
+        datum = []
+        # foreach, update db
+        for result in data.get('results', {})[:10]:
+            # get from db
+            try:
+                db_res = db_query("""
+                    SELECT bar.*, avg(rating.mark) as mark FROM bar
+                    LEFT JOIN rating ON bar.id = rating.bar_id
+                    WHERE gmap_ref = %s
+                    GROUP BY bar.id;
+                """, result.get('id'))[0]
+            except:
+                # if not present insert
+                loc = result.get('geometry', {}).get('location', {})
+                db_id = db_query("""
+                    INSERT INTO bar (name, latposition, longposition, description, gmap_ref)
+                    VALUES (%s, %s, %s, %s, %s);
+                """,
+                    result.get('name'),
+                    loc.get('lat'),
+                    loc.get('long'),
+                    result.get('vicinity'),
+                    result.get('place_id')
+                )
+                db_res = {
+                    'id': db_id,
+                    'name': result.get('name'),
+                    'kind': None,
+                    'latposition': loc.get('lat'),
+                    'longposition': loc.get('long'),
+                    'description': result.get('vicinity'),
+                    'gmap_ref': result.get('place_id'),
+                    'mark': None
+                }
+
+            # merge data
+            photos = result.get('photos', [])
+            if len(photos) is 0:
+                photo = None
+            else:
+                photo = 'https://maps.googleapis.com/maps/api/place/photo' \
+                '?photoreference=%s' \
+                '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
+                % photos[0].get('photo_reference')
+            db_res.update({
+                'picture': photo,
+                'open_now': result.get('opening_hours', {}).get('open_now', False),
+                'types': result.get('types')
+            })
+
+            datum.append(db_res)
+
+        return datum
 
     def bar_detail(self, data, bar_id):
         """
@@ -148,8 +216,28 @@ class Api(object):
             WHERE bar.id = %s
             GROUP BY bar.id;
             """, bar_id)[0]
+
         except:
             raise Exception('Bar not found')
+
+        details = json.loads(requests.get('https://maps.googleapis.com/maps/api/place/details/json' \
+        '?placeid=%s' \
+        '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4' \
+        % bar.get('gmap_ref')).content).get('result', {})
+
+        photos = details.get('photos', [])
+        if len(photos) is 0:
+            photo = None
+        else:
+            photo = 'https://maps.googleapis.com/maps/api/place/photo' \
+            '?photoreference=%s' \
+            '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
+            % photos[0].get('photo_reference')
+        bar.update({
+            'picture': photo,
+            'open_now': details.get('opening_hours', {}).get('open_now', False),
+            'types': details.get('types')
+        })
 
         return bar
 
