@@ -1,7 +1,9 @@
+import json
 import re
 import sys
 import logging
 import inspect
+import requests
 import mysql.connector
 from mysql.connector import IntegrityError
 from flask import Flask, request, jsonify
@@ -121,20 +123,88 @@ class Api(object):
             WHERE email = %s;
         """, data['latposition'], data['longposition'], email)
 
-        return self.user_get(data, email=email)
+        request.args = dict(request.args)
+        request.args.update({
+            'lat': data['latposition'],
+            'long': data['longposition']
+        })
+
+        return self.bar_list(data)
 
     def bar_list(self, data):
         """
             GET: /bar
             Get bar list (optional: nearby user)
         """
-        bars = db_query("""
-            SELECT bar.*, avg(rating.mark) as mark FROM bar
-            LEFT JOIN rating ON bar.id = rating.bar_id
-            GROUP BY bar.id;
-        """)
 
-        return bars
+        if 'lat' not in request.args or 'long' not in request.args:
+            raise Exception('Motherfucka get da chopa !')
+
+        # get closest bars
+        data = json.loads(requests.get(
+            'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
+            '?location=%s,%s'
+            '&type=bar'
+            '&rankby=distance'
+            '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'
+            % (request.args.get('lat'), request.args.get('long'))
+        ).content)
+
+        datum = []
+        # foreach, update db
+        for result in data.get('results', {}):
+            # get from db
+            try:
+                db_res = db_query("""
+                    SELECT bar.*, avg(rating.mark) as mark FROM bar
+                    LEFT JOIN rating ON bar.id = rating.bar_id
+                    WHERE gmap_ref = %s
+                    GROUP BY bar.id;
+                """, result.get('place_id'))[0]
+            except:
+                logger.exception('DEBUG')
+                # if not present insert
+                loc = result.get('geometry', {}).get('location', {})
+                db_id = db_query("""
+                    INSERT INTO bar (name, latposition, longposition, description, gmap_ref)
+                    VALUES (%s, %s, %s, %s, %s);
+                """,
+                    result.get('name'),
+                    loc.get('lat'),
+                    loc.get('long'),
+                    result.get('vicinity'),
+                    result.get('place_id')
+                )
+                db_res = {
+                    'id': db_id,
+                    'name': result.get('name'),
+                    'kind': None,
+                    'latposition': loc.get('lat'),
+                    'longposition': loc.get('long'),
+                    'description': result.get('vicinity'),
+                    'gmap_ref': result.get('place_id'),
+                    'mark': None
+                }
+
+            # merge data
+            photos = result.get('photos', [])
+            if len(photos) is 0:
+                photo = None
+            else:
+                photo = 'https://maps.googleapis.com/maps/api/place/photo' \
+                '?maxwidth=400' \
+                '&photoreference=%s' \
+                '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
+                % photos[0].get('photo_reference')
+            db_res.update({
+                'picture': photo,
+                'open_now': result.get('opening_hours', {}).get('open_now', False),
+                'types': result.get('types')
+            })
+
+            datum.append(db_res)
+
+        return datum
 
     def bar_detail(self, data, bar_id):
         """
@@ -148,14 +218,35 @@ class Api(object):
             WHERE bar.id = %s
             GROUP BY bar.id;
             """, bar_id)[0]
+
         except:
             raise Exception('Bar not found')
+
+        details = json.loads(requests.get('https://maps.googleapis.com/maps/api/place/details/json' \
+        '?placeid=%s' \
+        '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4' \
+        % bar.get('gmap_ref')).content).get('result', {})
+
+        photos = details.get('photos', [])
+        if len(photos) is 0:
+            photo = None
+        else:
+            photo = 'https://maps.googleapis.com/maps/api/place/photo' \
+                '?maxwidth=400' \
+                '&photoreference=%s' \
+                '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
+            % photos[0].get('photo_reference')
+        bar.update({
+            'picture': photo,
+            'open_now': details.get('opening_hours', {}).get('open_now', False),
+            'types': details.get('types')
+        })
 
         return bar
 
     def bar_rating(self, data, bar_id, rating):
         """
-            PUT: /bar/<bar_id>/<int:rating>
+            GET: /bar/<bar_id>/<int:rating>
             Rate a bar (?user_id=XXX)
 
         """
@@ -168,16 +259,16 @@ class Api(object):
         db_query("""
             INSERT INTO rating (mark, user_id, bar_id, drink_id)
             VALUES (%s, %s, %s, %s)
-        """, request.args('user_id'),
+        """, rating,
+             request.args.get('user_id'),
              bar_id,
-             None,
-             rating)
+             None)
 
         return 'OK'
 
     def drink_rating(self, data, drink_id, rating):
         """
-            PUT: /drink/<drink_id>/<int:rating>
+            GET: /drink/<drink_id>/<int:rating>
             Rate a drink (?user_id=XXX)
         """
         if rating < 0 or rating > 5:
@@ -189,30 +280,42 @@ class Api(object):
         db_query("""
             INSERT INTO rating (mark, user_id, bar_id, drink_id)
             VALUES (%s, %s, %s, %s)
-        """, request.args('user_id'),
+        """, rating,
+             request.args.get('user_id'),
              None,
-             drink_id,
-             rating)
+             drink_id)
 
         return 'OK'
+
+    def search_none(self, data, text):
+        """
+            GET: /search/
+        """
+        return {
+            'bar': None,
+            'drink': None
+        }
 
     def search_bar_drink(self, data, text):
         """
             GET: /search/<text>
         """
+        text = re.sub('[^\w]', '.', text)
         bars = db_query("""
             SELECT * FROM bar
-            WHERE upper(name) LIKE upper(%s)
-              AND upper(description) LIKE upper(%s)
-              AND upper(kind) LIKE upper(%s);
-        """, text, text, text)
+            WHERE name LIKE upper('%%%s%%')
+              OR description LIKE upper('%%%s%%')
+              OR kind LIKE upper('%%%s%%')
+            LIMIT 10;
+        """ % (text, text, text))
 
         drinks = db_query("""
             SELECT * FROM drink
-            WHERE upper(name) LIKE upper(%s)
-              AND upper(description) LIKE upper(%s)
-              AND upper(tags) LIKE upper(%s);
-        """, text, text, text)
+            WHERE upper(name) LIKE upper('%%%s%%')
+              OR upper(description) LIKE upper('%%%s%%')
+              OR upper(tags) LIKE upper('%%%s%%')
+            LIMIT 10;
+        """ % (text, text, text))
 
         return {
             'bar': bars,
