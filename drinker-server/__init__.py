@@ -436,6 +436,43 @@ class Api(object):
 
         return drinks
 
+    def drink_request(self, data, user_id, friend_id, bar_id):
+        """
+            GET: /drink_request/<user_id>/<friend_id>/<bar_id>
+            Ask a friend for a drink
+        """
+
+        db_query("""
+            INSERT INTO request (user_id, friend_id, bar_id)
+            VALUES (%s, %s, %s);
+        """, user_id, friend_id, bar_id)
+
+        return "Drink request sent"
+
+    def drink_request_list(self, data, user_id):
+        """
+            GET: /drink_request/<user_id>/<friend_id>
+            Ask a friend for a drink (optional: ?bar_id=X)
+        """
+
+        return db_query("""
+            SELECT user.*, bar_id FROM user
+            JOIN request ON request.friend_id = user.id
+            WHERE request.user_id = %s;
+        """, user_id)
+
+    def drink_request_accept(self, data, drink_request):
+        """
+            GET: /drink_request/<drink_request>
+            Accept drink request
+        """
+
+        db_query("""
+            DELETE FROM request WHERE id = %s;
+        """, drink_request)
+
+        return "OK"
+
 
 app = Flask(__name__)
 api = Api(app)
