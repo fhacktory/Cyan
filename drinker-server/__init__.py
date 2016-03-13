@@ -193,7 +193,7 @@ class Api(object):
             else:
                 photo = 'https://maps.googleapis.com/maps/api/place/photo' \
                 '?photoreference=%s' \
-                '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
+                '&key=AIzaSyAdd9una-efwMK7JTNvDUxNjA67sfOZaI4'\
                 % photos[0].get('photo_reference')
             db_res.update({
                 'picture': photo,
