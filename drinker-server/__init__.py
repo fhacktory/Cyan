@@ -152,7 +152,7 @@ class Api(object):
 
         datum = []
         # foreach, update db
-        for result in data.get('results', {})[:10]:
+        for result in data.get('results', {}):
             # get from db
             try:
                 db_res = db_query("""
