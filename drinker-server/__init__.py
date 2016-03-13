@@ -290,16 +290,16 @@ class Api(object):
         """
         bars = db_query("""
             SELECT * FROM bar
-            WHERE upper(name) LIKE upper('%' || %s || '%')
-              OR upper(description) LIKE upper('%' || %s || '%')
-              OR upper(kind) LIKE upper('%' || %s || '%');
+            WHERE upper(name) LIKE upper(concat('%', %s, '%'))
+              OR upper(description) LIKE upper(concat('%', %s, '%'))
+              OR upper(kind) LIKE upper(concat('%', %s, '%'));
         """, text, text, text)
 
         drinks = db_query("""
             SELECT * FROM drink
-            WHERE upper(name) LIKE upper('%' || %s || '%')
-              OR upper(description) LIKE upper('%' || %s || '%')
-              OR upper(tags) LIKE upper('%' || %s || '%');
+            WHERE upper(name) LIKE upper(concat('%', %s, '%'))
+              OR upper(description) LIKE upper(concat('%', %s, '%'))
+              OR upper(tags) LIKE upper(concat('%', %s, '%'));
         """, text, text, text)
 
         return {
