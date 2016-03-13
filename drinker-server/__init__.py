@@ -418,7 +418,7 @@ class Api(object):
             List drinks (optional: ?bar_id=XXX)
         """
 
-        if 'bar_id' not in request.args:
+        if 'bar_id' in request.args:
             drinks = db_query("""
                  SELECT * FROM drink WHERE bar_id = %s;
             """, request.args.get('bar_id'))
