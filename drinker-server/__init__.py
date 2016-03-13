@@ -246,7 +246,7 @@ class Api(object):
 
     def bar_rating(self, data, bar_id, rating):
         """
-            POST: /bar/<bar_id>/<int:rating>
+            GET: /bar/<bar_id>/<int:rating>
             Rate a bar (?user_id=XXX)
 
         """
@@ -268,7 +268,7 @@ class Api(object):
 
     def drink_rating(self, data, drink_id, rating):
         """
-            POST: /drink/<drink_id>/<int:rating>
+            GET: /drink/<drink_id>/<int:rating>
             Rate a drink (?user_id=XXX)
         """
         if rating < 0 or rating > 5:
