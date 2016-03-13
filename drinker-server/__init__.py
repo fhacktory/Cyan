@@ -301,14 +301,16 @@ class Api(object):
             SELECT * FROM bar
             WHERE upper(name) LIKE upper(concat('%', %s, '%'))
               OR upper(description) LIKE upper(concat('%', %s, '%'))
-              OR upper(kind) LIKE upper(concat('%', %s, '%'));
+              OR upper(kind) LIKE upper(concat('%', %s, '%'))
+            LIMIT 10;
         """, text, text, text)
 
         drinks = db_query("""
             SELECT * FROM drink
             WHERE upper(name) LIKE upper(concat('%', %s, '%'))
               OR upper(description) LIKE upper(concat('%', %s, '%'))
-              OR upper(tags) LIKE upper(concat('%', %s, '%'));
+              OR upper(tags) LIKE upper(concat('%', %s, '%'))
+            LIMIT 10;
         """, text, text, text)
 
         return {
