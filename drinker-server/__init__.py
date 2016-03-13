@@ -160,7 +160,7 @@ class Api(object):
                     LEFT JOIN rating ON bar.id = rating.bar_id
                     WHERE gmap_ref = %s
                     GROUP BY bar.id;
-                """, result.get('id'))[0]
+                """, result.get('place_id'))[0]
             except:
                 logger.exception('DEBUG')
                 # if not present insert
