@@ -156,7 +156,7 @@ class Api(object):
             # get from db
             try:
                 db_res = db_query("""
-                    SELECT bar.*, avg(rating.mark) as mark FROM bar
+                    SELECT bar.*,  CAST(avg(rating.mark) as UNSIGNED) as mark FROM bar
                     LEFT JOIN rating ON bar.id = rating.bar_id
                     WHERE gmap_ref = %s
                     GROUP BY bar.id;
@@ -213,7 +213,7 @@ class Api(object):
         """
         try:
             bar = db_query("""
-            SELECT bar.*, avg(rating.mark) as mark FROM bar
+            SELECT bar.*,  CAST(avg(rating.mark) as UNSIGNED) as mark FROM bar
             LEFT JOIN rating ON bar.id = rating.bar_id
             WHERE bar.id = %s
             GROUP BY bar.id;
