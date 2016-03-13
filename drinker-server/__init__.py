@@ -291,15 +291,15 @@ class Api(object):
         bars = db_query("""
             SELECT * FROM bar
             WHERE upper(name) LIKE upper(%s)
-              AND upper(description) LIKE upper(%s)
-              AND upper(kind) LIKE upper(%s);
+              OR upper(description) LIKE upper(%s)
+              OR upper(kind) LIKE upper(%s);
         """, text, text, text)
 
         drinks = db_query("""
             SELECT * FROM drink
             WHERE upper(name) LIKE upper(%s)
-              AND upper(description) LIKE upper(%s)
-              AND upper(tags) LIKE upper(%s);
+              OR upper(description) LIKE upper(%s)
+              OR upper(tags) LIKE upper(%s);
         """, text, text, text)
 
         return {
