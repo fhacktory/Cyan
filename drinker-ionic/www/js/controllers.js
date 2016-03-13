@@ -44,17 +44,11 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   };
 })
 
-.controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory',
-'dishes', 'baseURL', '$ionicListDelegate', function ($scope, menuFactory,
-  favoriteFactory, dishes, baseURL, $ionicListDelegate) {
+.controller('FriendController', ['$scope', 'baseURL', '$ionicListDelegate', function ($scope, baseURL, $ionicListDelegate) {
     $scope.baseURL = baseURL;
 
     $scope.tab = 1;
     $scope.filtText = '';
-    $scope.showDetails = false;
-    $scope.showMenu = false;
-    $scope.message = "Loading ...";
-    $scope.dishes = dishes
 
     $scope.select = function(setTab) {
         $scope.tab = setTab;
@@ -118,11 +112,6 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
 
         barFactory.sendBar().get({lat:lat, long:long}).$promise
         .then(function(data){
-          barFactory.getBars().get().$promise
-          .then(function(data){
-          	$scope.bars = data.data;
-            console.log($scope.bars);
-          });
 
         });
 
@@ -189,9 +178,7 @@ angular.module('Drinker.controllers', ['ionic','ngCordova'])
   $scope.shouldShowDelete = false;
 
   $scope.favorites = favorites;
-
   $scope.dishes = dishes;
-
     $ionicLoading.show({
         template: '<ion-spinner></ion-spinner> Loading...'
     });
