@@ -1,3 +1,4 @@
+import hashlib
 import json
 import re
 import sys
@@ -102,7 +103,6 @@ class Api(object):
         except IndexError:
             raise Exception('User not found')
 
-        import hashlib
         email_hash = hashlib.md5(email.lower()).hexdigest()
         user['picture'] = 'http://www.gravatar.com/avatar/' + email_hash
 
@@ -308,6 +308,27 @@ class Api(object):
             LIMIT 10;
         """ % (text, text, text))
 
+        for bar in bars:
+            details = json.loads(requests.get('https://maps.googleapis.com/maps/api/place/details/json' \
+            '?placeid=%s' \
+            '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4' \
+            % bar.get('gmap_ref')).content).get('result', {})
+
+            photos = details.get('photos', [])
+            if len(photos) is 0:
+                photo = None
+            else:
+                photo = 'https://maps.googleapis.com/maps/api/place/photo' \
+                    '?maxwidth=400' \
+                    '&photoreference=%s' \
+                    '&key=AIzaSyCBWhYZccelEDuhaJAeGuTgtX5wp5D62G4'\
+                % photos[0].get('photo_reference')
+            bar.update({
+                'picture': photo,
+                'open_now': details.get('opening_hours', {}).get('open_now', False),
+                'types': details.get('types')
+            })
+
         drinks = db_query("""
             SELECT * FROM drink
             WHERE upper(name) LIKE upper('%%%s%%')
@@ -323,6 +344,10 @@ class Api(object):
               OR upper(last_name) LIKE upper('%%%s%%')
             LIMIT 10;
         """ % (text, text, text))
+
+        for user in users:
+            email_hash = hashlib.md5(user.get('email').lower()).hexdigest()
+            user['picture'] = 'http://www.gravatar.com/avatar/' + email_hash
 
         return {
             'bar': bars,
